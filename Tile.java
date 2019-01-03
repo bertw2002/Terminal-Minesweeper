@@ -3,7 +3,23 @@ public class Tile {
 	private boolean Flagged; //Was this tile flagged?
 	private boolean Cleared; //Was this tile cleared?
 	private boolean Mine; //Is this tile a mine?
-	private int minesAround; //Number of mines around this tile in a 3x3 radius (corners included) (this is -1 if it's a mine)
+	private int RowPos; //Row this tile is in
+	private int ColPos; //Column this tile this in
 	
-	
+	public Tile(boolean m, int rp, int cp) {
+		Mine = m;
+		RowPos = rp;
+		ColPos = cp;
+		Open = false;
+		Cleared = false;
+		Flagged = false;
+	}
+	public boolean isMine() {
+		return m;
+	}
+	public void clear() {
+		Open = true;
+		Cleared = true;
+		//not finished
+	}
 }
