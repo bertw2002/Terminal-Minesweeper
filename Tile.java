@@ -36,6 +36,9 @@ public class Tile {
 		Open = true;
 		Flagged = true;
 	}
+	public boolean isOpen(){
+		return Open;
+	}
 	public void unflag() {
 		Open = false;
 		Flagged = false;
