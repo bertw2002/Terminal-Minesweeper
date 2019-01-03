@@ -5,6 +5,7 @@ public class Tile {
 	private boolean Mine; //Is this tile a mine?
 	private int RowPos; //Row this tile is in
 	private int ColPos; //Column this tile this in
+	private int TileNum; //Number of mines around this tile in a 3x3 radius (including corners) (-1 for mines)
 	
 	public Tile(boolean m, int rp, int cp) {
 		Mine = m;
@@ -17,9 +18,29 @@ public class Tile {
 	public boolean isMine() {
 		return m;
 	}
-	public void clear() {
+	public void setTileNum(int n) {
+		if(Mine) {TileNum = -1;}
+		else {TileNum = n;}
+	}
+	public int getTileNum() {
+		return TileNum;
+	}
+	public boolean clear() {
 		Open = true;
 		Cleared = true;
-		//not finished
+		if(Mine) {return false;}
+		return true;
+		//still have to work the logic out
+	}
+	public void flag() {
+		Open = true;
+		Flagged = true;
+	}
+	public String toString() {
+		if(!Open) {return "_";}
+		if(Flagged) {return "🚩";}
+		if(Mine) {return "🞜";}
+		if(TileNum = 0) {return " ";}
+		return "" + TileNum;
 	}
 }
