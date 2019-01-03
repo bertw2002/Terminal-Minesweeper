@@ -36,6 +36,10 @@ public class Tile {
 		Open = true;
 		Flagged = true;
 	}
+	public void unflag() {
+		Open = false;
+		Flagged = false;
+	}
 	public String toString() {
 		if(!Open) {return "_";}
 		if(Flagged) {return "🚩";}
