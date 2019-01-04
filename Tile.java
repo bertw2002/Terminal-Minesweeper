@@ -18,6 +18,9 @@ public class Tile {
 	public boolean isMine() {
 		return Mine;
 	}
+	public void setMine() {
+	    Mine = true;
+	}
 	public void setTileNum(int n) {
 		if(Mine) {TileNum = -1;}
 		else {TileNum = n;}
@@ -36,7 +39,7 @@ public class Tile {
 		Open = true;
 		Flagged = true;
 	}
-	public boolean isOpen(){
+	public boolean isOpen() {
 		return Open;
 	}
 	public void unflag() {
