@@ -15,6 +15,14 @@ public class Tile {
 		Cleared = false;
 		Flagged = false;
 	}
+	public Tile(int rp, int cp) {
+		Mine = false;
+		RowPos = rp;
+		ColPos = cp;
+		Open = false;
+		Cleared = false;
+		Flagged = false;
+	}
 	public boolean isMine() {
 		return Mine;
 	}
