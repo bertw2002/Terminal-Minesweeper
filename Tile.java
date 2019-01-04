@@ -6,7 +6,7 @@ public class Tile {
 	private int RowPos; //Row this tile is in
 	private int ColPos; //Column this tile this in
 	private int TileNum; //Number of mines around this tile in a 3x3 radius (including corners) (-1 for mines)
-	
+
 	public Tile(boolean m, int rp, int cp) {
 		Mine = m;
 		RowPos = rp;
@@ -16,7 +16,7 @@ public class Tile {
 		Flagged = false;
 	}
 	public boolean isMine() {
-		return m;
+		return Mine;
 	}
 	public void setTileNum(int n) {
 		if(Mine) {TileNum = -1;}
@@ -47,7 +47,7 @@ public class Tile {
 		if(!Open) {return "_";}
 		if(Flagged) {return "🚩";}
 		if(Mine) {return "🞜";}
-		if(TileNum = 0) {return " ";}
+		if(TileNum == 0) {return " ";}
 		return "" + TileNum;
 	}
 }
