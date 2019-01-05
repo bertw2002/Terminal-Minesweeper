@@ -88,22 +88,23 @@ public class Board{
     return board[xcor][ycor];
   }
   public String toString(){
-    String board = "  ";
+    String sboard = "  "; //string version of board
     int counter = 1;
     char alphabet = 'A';
     for (int hor = 0; hor < hsize; hor ++){
-      board += counter;
+      sboard += counter;
       counter ++;
     }
     for (int x = 0; x < hsize; x ++){
-      board += alphabet;
-      board += "|";
+      sboard += alphabet;
+      sboard += "|";
       for (int y = 0; y < vsize; y ++){
-        board += Tile(x, y).toString();
+        sboard += board[x][y].toString();
       }
       alphabet ++;
-      board += "|";
+      sboard += "|" + "\n";
     }
+    return sboard;
   }
 
 }

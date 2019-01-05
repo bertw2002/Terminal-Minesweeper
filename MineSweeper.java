@@ -4,7 +4,7 @@ public class MineSweeper{
   private String difficulty;
   public MineSweeper(String diff){
     difficulty = diff;
-    board = new board(difficulty);
+    board = new Board(difficulty);
   }
   public static void main(String[] args){
   }
