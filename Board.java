@@ -61,14 +61,18 @@ public class Board{
     int counter = 1;
     char alphabet = 'A';
     for (int hor = 0; hor < hsize; hor ++){
-      sboard += counter; //creates horizontal locator in numbers
+      if (hor != 0){
+        sboard += " " + counter; //creates horizontal locator in numbers
+      }else{sboard +=  counter;}
       counter ++;
     }
+    sboard += "\n";
     for (int x = 0; x < hsize; x ++){
       sboard += alphabet; //creates vertical locator in letters
       sboard += "|";
       for (int y = 0; y < vsize; y ++){
-        sboard += board[x][y].toString();
+        if (y != hsize - 1){sboard += board[x][y].toString() + " ";}
+        else{sboard += board[x][y].toString();}
       }
       alphabet ++;
       sboard += "|" + "\n";
