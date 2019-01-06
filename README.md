@@ -15,4 +15,7 @@ Julian: Today, I made the tile class and I added the constructor and made the fl
 # 04.01.2019
 Julian: Today, I edited the constructors for the Board class, adding the Tile initialization function for the Tile[][] board, and fixed some bugs here and there.
 
-Albert: Today, I made the Minesweeper class and started writing the class variables.
+Albert: Today, I made the Minesweeper class and started writing the class variables and started the constructor. I also made the toString for the board class. Not sure if it works though.
+
+# 05.01.2019
+
