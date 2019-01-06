@@ -18,4 +18,4 @@ Julian: Today, I edited the constructors for the Board class, adding the Tile in
 Albert: Today, I made the Minesweeper class and started writing the class variables and started the constructor. I also made the toString for the board class. Not sure if it works though.
 
 # 05.01.2019
-
+Albert: Today, I made the driver class and tested the Tile class, and made some fixes so it should be fully working now. I also tweaked the board constructors so they don't include number of mines.
