@@ -21,6 +21,7 @@ public class Board{
         }
     }
   }
+
   public Board(String difficulty) { //constructor that implements presets based on difficulty
 	if(difficulty == "easy" || difficulty == "Easy") {
 		hsize = 8;
@@ -52,6 +53,7 @@ public class Board{
         }
     }
   }
+  /*
   public void assignNumbers() {
 	for(int q = 0; q < board.length; q++) {
 		for(int w = 0; w < board[q].length; w++) {
@@ -70,7 +72,7 @@ public class Board{
 				else { //top edge
 					if(board[q][w - 1].isMine()) {tempNum++;}
 					if(board[q][w + 1].isMine()) {tempNum++;}
-					if(board[q + 1][w - 1].isMine()) {tempNum++;}
+					if(board[q + 1][w - 1].isMin){e()) {tempNum++;}
 					if(board[q + 1][w].isMine()) {tempNum++;}
 					if(board[q + 1][w + 1].isMine()) {tempNum++;}
 				}
@@ -125,28 +127,30 @@ public class Board{
 		}
 	}
   }
+  */
   public Tile getTile(int xcor, int ycor){
     return board[xcor][ycor];
   }
   public String toString(){
     String sboard = "  "; //string version of board
     int counter = 1;
-    char alphabet = 'A';
+    char yalphabet = 'A'; //alphabet placed vertically
+    char xalphabet = 'A'; //alphabet placed horizontally
     for (int hor = 0; hor < hsize; hor ++){
       if (hor != 0){
-        sboard += " " + counter; //creates horizontal locator in numbers
-      }else{sboard +=  counter;}
-      counter ++;
+        sboard += " " + xalphabet; //creates horizontal locator in numbers
+      }else{sboard += xalphabet;}
+      xalphabet ++;
     }
     sboard += "\n";
     for (int x = 0; x < hsize; x ++){
-      sboard += alphabet; //creates vertical locator in letters
+      sboard += yalphabet; //creates vertical locator in letters
       sboard += "|";
       for (int y = 0; y < vsize; y ++){
         if (y != hsize - 1){sboard += board[x][y].toString() + " ";}
         else{sboard += board[x][y].toString();}
       }
-      alphabet ++;
+      yalphabet ++;
       sboard += "|" + "\n";
     }
     return sboard;
