@@ -19,7 +19,6 @@ public class Board{
             board[q][w] = new Tile(mineGen, q, w);
         }
     }
-
   }
   public Board(String difficulty) { //constructor that implements presets based on difficulty
 	if(difficulty == "easy" || difficulty == "Easy") {
@@ -51,7 +50,6 @@ public class Board{
             board[q][w] = new Tile(mineGen, q, w);
         }
     }
-
   }
   public void assignNumbers() {
 	for(int q = 0; q < board.length; q++) {
@@ -122,10 +120,9 @@ public class Board{
 				}
 			}
 			if(board[q][w].isMine()) {board[q][w].setTileNum(-1);} //if tile is mine, set number -1
-			else {board[q][w].setTileNum(tempNum); //if tile not mine, set number to the number of mines around it
+			else {board[q][w].setTileNum(tempNum);} //if tile not mine, set number to the number of mines around it
 		}
 	}
-  }
   }
   public Tile getTile(int xcor, int ycor){
     return board[xcor][ycor];
@@ -153,5 +150,4 @@ public class Board{
     }
     return sboard;
   }
-
 }
