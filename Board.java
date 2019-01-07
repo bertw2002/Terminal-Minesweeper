@@ -97,19 +97,35 @@ public class Board{
 			}
 			else { //if neither top nor bottom row
 				if(w == 0) { //left edge
-					
+					if(board[q - 1][w].isMine()) {tempNum++;}
+					if(board[q + 1][w].isMine()) {tempNum++;}
+					if(board[q - 1][w + 1].isMine()) {tempNum++;}
+					if(board[q][w + 1].isMine()) {tempNum++;}
+					if(board[q + 1][w + 1].isMine()) {tempNum++;}
 				}
 				else if(w == board[q].length - 1) { //right edge
-					
+					if(board[q - 1][w].isMine()) {tempNum++;}
+					if(board[q + 1][w].isMine()) {tempNum++;}
+					if(board[q - 1][w - 1].isMine()) {tempNum++;}
+					if(board[q][w - 1].isMine()) {tempNum++;}
+					if(board[q + 1][w - 1].isMine()) {tempNum++;}
 				}
 				else { //middle
-					
+					if(board[q - 1][w - 1].isMine()) {tempNum++;}
+					if(board[q - 1][w].isMine()) {tempNum++;}
+					if(board[q - 1][w + 1].isMine()) {tempNum++;}
+					if(board[q][w - 1].isMine()) {tempNum++;}
+					if(board[q][w + 1].isMine()) {tempNum++;}
+					if(board[q + 1][w - 1].isMine()) {tempNum++;}
+					if(board[q + 1][w].isMine()) {tempNum++;}
+					if(board[q + 1][w + 1].isMine()) {tempNum++;}
 				}
 			}
 			if(board[q][w].isMine()) {board[q][w].setTileNum(-1);} //if tile is mine, set number -1
 			else {board[q][w].setTileNum(tempNum); //if tile not mine, set number to the number of mines around it
 		}
 	}
+  }
   }
   public Tile getTile(int xcor, int ycor){
     return board[xcor][ycor];
