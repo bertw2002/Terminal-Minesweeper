@@ -53,6 +53,64 @@ public class Board{
     }
 
   }
+  public void assignNumbers() {
+	for(int q = 0; q < board.length; q++) {
+		for(int w = 0; w < board[q].length; w++) {
+			int tempNum = 0;
+			if(q == 0) { //if tile is in top row
+				if(w == 0) { //top left
+					if(board[q][w + 1].isMine()) {tempNum++;}
+					if(board[q + 1][w].isMine()) {tempNum++;}
+					if(board[q + 1][w + 1].isMine()) {tempNum++;}
+				}
+				else if(w == board[q].length - 1) { //top right
+					if(board[q][w - 1].isMine()) {tempNum++;}
+					if(board[q + 1][w].isMine()) {tempNum++;}
+					if(board[q + 1][w - 1].isMine()) {tempNum++;}
+				}
+				else { //top edge
+					if(board[q][w - 1].isMine()) {tempNum++;}
+					if(board[q][w + 1].isMine()) {tempNum++;}
+					if(board[q + 1][w - 1].isMine()) {tempNum++;}
+					if(board[q + 1][w].isMine()) {tempNum++;}
+					if(board[q + 1][w + 1].isMine()) {tempNum++;}
+				}
+			}
+			else if(q == board.length - 1) { //if time is in bottom row
+				if(w == 0) { //bottom left
+					if(board[q - 1][w].isMine()) {tempNum++;}
+					if(board[q - 1][w + 1].isMine()) {tempNum++;}
+					if(board[q][w + 1].isMine()) {tempNum++;}
+				}
+				else if(w == board[q].length - 1) { //bottom right
+					if(board[q - 1][w].isMine()) {tempNum++;}
+					if(board[q - 1][w - 1].isMine()) {tempNum++;}
+					if(board[q][w - 1].isMine()) {tempNum++;}
+				}
+				else { //bottom edge
+					if(board[q][w - 1].isMine()) {tempNum++;}
+					if(board[q][w + 1].isMine()) {tempNum++;}
+					if(board[q - 1][w - 1].isMine()) {tempNum++;}
+					if(board[q - 1][w].isMine()) {tempNum++;}
+					if(board[q - 1][w + 1].isMine()) {tempNum++;}
+				}
+			}
+			else { //if neither top nor bottom row
+				if(w == 0) { //left edge
+					
+				}
+				else if(w == board[q].length - 1) { //right edge
+					
+				}
+				else { //middle
+					
+				}
+			}
+			if(board[q][w].isMine()) {board[q][w].setTileNum(-1);} //if tile is mine, set number -1
+			else {board[q][w].setTileNum(tempNum); //if tile not mine, set number to the number of mines around it
+		}
+	}
+  }
   public Tile getTile(int xcor, int ycor){
     return board[xcor][ycor];
   }
