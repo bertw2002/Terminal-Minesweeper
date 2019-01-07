@@ -5,6 +5,7 @@ public class Board{
   private int vsize; //vertical size
   private int numFlags; //number of flags remaining
   public Board(int verticalsize, int horizontalsize){ //constructor for custom board specs
+	if(verticalsize < 2 || horizontalsize < 2) {throw new IllegalArgumentException();}
     hsize = horizontalsize;
     vsize = verticalsize;
     board = new Tile[hsize][vsize];
