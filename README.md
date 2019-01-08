@@ -19,3 +19,12 @@ Albert: Today, I made the Minesweeper class and started writing the class variab
 
 # 05.01.2019
 Albert: Today, I made the driver class and tested the Tile class, and made some fixes so it should be fully working now. I also tweaked the board constructors so they don't include number of mines.
+
+# 06.01.2019
+Julian: Today, finished assignNumbers() (not tested) and and put some exception handling in the board constructor. Also, I added the scanner with currenttimemillis in the Minesweeper class.
+
+Albert: Today, I fixed the board class so it should be fully working. (Haven't tested yet) I also fixed an error in the toString for the board class, but I still have to work on the horizontal locators. 
+
+# 07.01.2019
+Albert: Today, I decided to make the horizontal locators letters instead of numbers because they are too clunky and made the change. Also, I tweaked the board constructor so that capitals don't matter making life easier for the player.
+
