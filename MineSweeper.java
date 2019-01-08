@@ -24,9 +24,12 @@ public class MineSweeper{
   public boolean makeMove(String inp) {
 	  if(inp.length() != 3) {System.out.println("input must be 3 characters long! read directions if you're confused"); return true;}
 	  if((inp.charAt(0) < 'A' || inp.charAt(0) > 'Z') && (inp.charAt(0) < 'a' || inp.charAt(0) > 'z')) {System.out.println("wrong first digit format! refer to directions!"); return true;}
-	  char temp = Character.toLowerCase(inp.charAt(0));
+	  char temp = Character.toLowerCase(inp.charAt(0)); //this ln and 2 lns below convert char to correct row number
 	  int tempCharInt = temp;
-	  int rowValue = tempCharInt - 97;
+	  int rowValue = tempCharInt - 97; // rowValue is row chosen by user
+	  if(rowValue < 0 || rowValue >= board.rowCount()) {System.out.println("Row index out of bounds"); return true;} //checks if row input out of bounds
+	  int tempcv = inp.charAt(1); //THIS IS WRONG IT SHOULD BE LETTERS NOT NUMBERS fix tmr
+	  int colValue = tempcv - 48;
 	  return true;
   }
   public static void main(String[] args) {
