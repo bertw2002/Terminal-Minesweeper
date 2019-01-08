@@ -3,7 +3,7 @@ public class Board{
   private Tile[][] board; //makes the actual Board
   private int hsize; //horizontal size
   private int vsize; //vertical size
-  private int numFlags; //number of flags remaining
+  public int numFlags; //number of flags remaining
   public Board(int verticalsize, int horizontalsize){ //constructor for custom board specs
 	if(verticalsize < 2 || horizontalsize < 2) {throw new IllegalArgumentException();}
     hsize = horizontalsize;
@@ -130,30 +130,57 @@ public class Board{
   public Tile getTile(int xcor, int ycor) {
     return board[xcor][ycor];
   }
-  /* THIS METHOD IS BROKEN!!!!!!!!! REWRITE!!!!!!!!!
   public String toString(){
     String sboard = "  "; //string version of board
     int counter = 1;
-    char yalphabet = 'A'; //alphabet placed vertically
-    char xalphabet = 'A'; //alphabet placed horizontally
+    char y1 = 'A'; //alphabet placed vertically first row
+    char y2 = 'A'; //alphabet placed vertically second row
+    int x1 = 0; //horizontal locators first row.
+    int x2 = 0; //horizontal locators second row.
     for (int hor = 0; hor < hsize; hor ++){
+      if (counter == 11){
+        counter = 1;
+        x1 ++;
+      }
       if (hor != 0){
-        sboard += " " + xalphabet; //creates horizontal locator in numbers
-      }else{sboard += xalphabet;}
-      xalphabet ++;
+        sboard += " " + x1;
+      }else{sboard += x1;}
+      counter ++;
     }
     sboard += "\n";
+    sboard += "  ";
+    counter = 0;
+    for (int hor = 0; hor < hsize; hor ++){
+      if (counter == 10){
+        counter = 0;
+        x2 = 0;
+      }
+      if (hor != 0){sboard += " " + x2;}
+      else{sboard += x2;}
+      x2 ++;
+      counter ++;
+    }
+    sboard += "\n";
+    counter = 0;
     for (int x = 0; x < hsize; x ++){
-      sboard += yalphabet; //creates vertical locator in letters
+      if (counter == 26){
+        counter = 0;
+        y1 ++;
+      }
+      sboard += y1; //creates vertical locator in letters
+      sboard += y2;
+      if (y1 == 'Z'){y1 = 'A' - 1;}
+      if (y2 == 'Z'){y2 = 'A' - 1;}
       sboard += "|";
       for (int y = 0; y < vsize; y ++){
         if (y != hsize - 1){sboard += board[x][y].toString() + " ";}
         else{sboard += board[x][y].toString();}
       }
-      yalphabet ++;
+      y2 ++;
       sboard += "|" + "\n";
+      counter ++;
     }
     return sboard;
   }
-  */
+
 }
