@@ -16,10 +16,11 @@ public class MineSweeper{
   public static void main(String[] args){
     String directions = "";
     directions += "Requirements:" + "\n";
-    directions += "1. If your input length is 1, make sure it states either hard, easy or medium. (capitals don't matter).\n"
-    directions += "2. If your input length is 2, make sure it the sizes don't exceed 27 or are letters."
+    directions += "1. If your input length is 1, make sure it states either hard, easy or medium. (capitals don't matter).\n";
+    directions += "2. If your input length is 2, make sure it the sizes don't exceed 27 or are letters.";
     try {
       if (args.length == 1){
+		  MineSweeper game = new MineSweeper(args[0]);
       }
       else if (args.length == 2){
 
