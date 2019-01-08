@@ -13,6 +13,14 @@ public class MineSweeper{
 	startTime = System.currentTimeMillis();
 	timer = System.currentTimeMillis() - startTime;
   }
+  public MineSweeper(String hl, String vl) {
+	 int horiz = Integer.parseInt(hl);
+	 int vert = Integer.parseInt(vl);
+	 board = new Board(horiz, vert);
+	 gameOver = false;
+	 startTime = System.currentTimeMillis();
+	 timer = System.currentTimeMillis() - startTime;
+  } //MAKE SURE TO ADD CONSTRUCTOR LETTING PLAYER CUSTOMIZE NUM OF MINES LATER!!!!!
   public static void main(String[] args){
     String directions = "";
     directions += "Requirements:" + "\n";
@@ -23,7 +31,7 @@ public class MineSweeper{
 		  MineSweeper game = new MineSweeper(args[0]);
       }
       else if (args.length == 2){
-
+		MineSweeper game = new MineSweeper(args[0], args[1]);
       }
     }
     catch (Exception e){
