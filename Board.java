@@ -23,17 +23,17 @@ public class Board{
   }
 
   public Board(String difficulty) { //constructor that implements presets based on difficulty
-	if(difficulty.toLowerCase == "easy") {
+	if(difficulty.toLowerCase() == "easy") {
 		hsize = 8;
 		vsize = 8;
 		board = new Tile[hsize][vsize];
 	}
-	else if(difficulty.toLowerCase == "medium") {
+	else if(difficulty.toLowerCase() == "medium") {
 		hsize = 16;
 		vsize = 16;
 		board = new Tile[hsize][vsize];
 	}
-	else if(difficulty.toLowerCase == "hard") {
+	else if(difficulty.toLowerCase() == "hard") {
 		hsize = 32;
 		vsize = 32;
 		board = new Tile[hsize][vsize];
