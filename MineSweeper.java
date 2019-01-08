@@ -21,7 +21,15 @@ public class MineSweeper{
 	 startTime = System.currentTimeMillis();
 	 timer = System.currentTimeMillis() - startTime;
   } //MAKE SURE TO ADD CONSTRUCTOR LETTING PLAYER CUSTOMIZE NUM OF MINES LATER!!!!!
-  public static void main(String[] args){
+  public boolean makeMove(String inp) {
+	  if(inp.length() != 3) {System.out.println("input must be 3 characters long! read directions if you're confused"); return true;}
+	  if((inp.charAt(0) < 'A' || inp.charAt(0) > 'Z') && (inp.charAt(0) < 'a' || inp.charAt(0) > 'z')) {System.out.println("wrong first digit format! refer to directions!"); return true;}
+	  char temp = Character.toLowerCase(inp.charAt(0));
+	  int tempCharInt = temp;
+	  int rowValue = tempCharInt - 97;
+	  return true;
+  }
+  public static void main(String[] args) {
     String directions = "";
     directions += "Requirements:" + "\n";
     directions += "1. If your input length is 1, make sure it states either hard, easy or medium. (capitals don't matter).\n";
