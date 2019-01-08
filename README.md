@@ -28,3 +28,4 @@ Albert: Today, I fixed the board class so it should be fully working. (Haven't t
 # 07.01.2019
 Albert: Today, I decided to make the horizontal locators letters instead of numbers because they are too clunky and made the change. Also, I tweaked the board constructor so that capitals don't matter making life easier for the player.
 
+Julian: Today, I updated the constructors for Board and Minesweeper, worked on user inputs for starting the game using args[] in MineSweeper's main method, and started writing the makeMove() method for MineSweeper which processes the user's moves
