@@ -21,7 +21,6 @@ public class Board{
         }
     }
   }
-
   public Board(String difficulty) { //constructor that implements presets based on difficulty
 	if(difficulty.toLowerCase() == "easy") {
 		hsize = 8;
@@ -53,7 +52,8 @@ public class Board{
         }
     }
   }
-  /*
+  public int rowCount() {return hsize;}
+  public int colCount() {return vsize;}
   public void assignNumbers() {
 	for(int q = 0; q < board.length; q++) {
 		for(int w = 0; w < board[q].length; w++) {
@@ -72,12 +72,12 @@ public class Board{
 				else { //top edge
 					if(board[q][w - 1].isMine()) {tempNum++;}
 					if(board[q][w + 1].isMine()) {tempNum++;}
-					if(board[q + 1][w - 1].isMin){e()) {tempNum++;}
+					if(board[q + 1][w - 1].isMine()) {tempNum++;}
 					if(board[q + 1][w].isMine()) {tempNum++;}
 					if(board[q + 1][w + 1].isMine()) {tempNum++;}
 				}
 			}
-			else if(q == board.length - 1) { //if time is in bottom row
+			if(q == board.length - 1) { //if time is in bottom row
 				if(w == 0) { //bottom left
 					if(board[q - 1][w].isMine()) {tempNum++;}
 					if(board[q - 1][w + 1].isMine()) {tempNum++;}
@@ -127,10 +127,10 @@ public class Board{
 		}
 	}
   }
-  */
-  public Tile getTile(int xcor, int ycor){
+  public Tile getTile(int xcor, int ycor) {
     return board[xcor][ycor];
   }
+  /* THIS METHOD IS BROKEN!!!!!!!!! REWRITE!!!!!!!!!
   public String toString(){
     String sboard = "  "; //string version of board
     int counter = 1;
@@ -155,4 +155,5 @@ public class Board{
     }
     return sboard;
   }
+  */
 }
