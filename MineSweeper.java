@@ -22,15 +22,26 @@ public class MineSweeper{
 	 timer = System.currentTimeMillis() - startTime;
   } //MAKE SURE TO ADD CONSTRUCTOR LETTING PLAYER CUSTOMIZE NUM OF MINES LATER!!!!!
   public boolean makeMove(String inp) {
-	  if(inp.length() != 3) {System.out.println("input must be 3 characters long! read directions if you're confused"); return true;}
-	  if((inp.charAt(0) < 'A' || inp.charAt(0) > 'Z') && (inp.charAt(0) < 'a' || inp.charAt(0) > 'z')) {System.out.println("wrong first digit format! refer to directions!"); return true;}
-	  char temp = Character.toLowerCase(inp.charAt(0)); //this ln and 2 lns below convert char to correct row number
-	  int tempCharInt = temp;
-	  int rowValue = tempCharInt - 97; // rowValue is row chosen by user
-	  if(rowValue < 0 || rowValue >= board.rowCount()) {System.out.println("Row index out of bounds"); return true;} //checks if row input out of bounds
-	  int tempcv = inp.charAt(1); //THIS IS WRONG IT SHOULD BE LETTERS NOT NUMBERS fix tmr
-	  int colValue = tempcv - 48;
-	  return true;
+	  if(inp.length() != 5) {System.out.println("Follow the correct move format! It's on the README"); return true;} //length of input correct?
+    int rowSel = 0; //row selected
+    rowSel += (inp.charAt(0) - 65) * 26; //first letter digit
+    rowSel += inp.charAt(1) - 65; //second letter digit
+    int colSel = 0; //col selected
+    colSel += (Character.getNumericValue(inp.charAt(2))) * 10; //first num digit
+    colSel += Character.getNumericValue(inp.charAt(3)); //second num digit
+    if(inp.charAt(4) == 'f') { //if user chose to flag
+      board.numFlags--;
+      board[rowSel][colSel].flag();
+    }
+    if(inp.charAt(4) == 'u') {
+      if(board[rowSel][colSel].isCleared()) {System.out.println("Can't unflag this tile"); return true;}
+      board.numFlags++;
+      board[rowSel][colSel].unflag();
+    }
+    if(inp.charAt(4) == 'c') {
+
+    }
+    return true;
   }
   public static void main(String[] args) {
     String directions = "";
