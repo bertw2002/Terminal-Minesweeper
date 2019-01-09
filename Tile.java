@@ -26,8 +26,8 @@ public class Tile {
 	public boolean isMine() {
 		return Mine;
 	}
-	public boolean isClear() {
-		return Cleared;
+	public boolean isFlagged() {
+		return Flagged;
 	}
 	public void setOpen(){
 		Open = true;
@@ -53,9 +53,9 @@ public class Tile {
 			Open = true;
 			Flagged = true;
 		}
+	}
 	public boolean isCleared() {
 		return Cleared;
-	}
 	}
 	public boolean isOpen() {
 		return Open;
