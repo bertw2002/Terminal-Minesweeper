@@ -29,3 +29,8 @@ Albert: Today, I fixed the board class so it should be fully working. (Haven't t
 Albert: Today, I decided to make the horizontal locators letters instead of numbers because they are too clunky and made the change. Also, I tweaked the board constructor so that capitals don't matter making life easier for the player.
 
 Julian: Today, I updated the constructors for Board and Minesweeper, worked on user inputs for starting the game using args[] in MineSweeper's main method, and started writing the makeMove() method for MineSweeper which processes the user's moves
+
+# 08.01.2019
+Albert: Today, I changed the toString for board so it can include a much larger range. It can go from 27^2 vertically to 99 horizontally.
+
+Julian: Today, I finished writing the makeMove() method in MineSweeper that processes the user's move input (what they type in to make a move) and wrote a new method isCleared() in Tile.
