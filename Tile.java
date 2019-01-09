@@ -26,6 +26,9 @@ public class Tile {
 	public boolean isMine() {
 		return Mine;
 	}
+	public boolean isClear() {
+		return Cleared;
+	}
 	public void setOpen(){
 		Open = true;
 	}
