@@ -49,7 +49,7 @@ public class MineSweeper{
       if(board.board[rowSel][colSel].isMine()) {gameOver = board.board[rowSel][colSel].clear(); prevMove = inp; return false;} //if mine hit, gameOver becomes false
       if(board.board[rowSel][colSel].getTileNum() != 0) {board.board[rowSel][colSel].clear(); prevMove = inp; return true;} //if tile has mine around it, just clear it
       board.board[rowSel][colSel].clear(); //if no mines around tile, clear
-      //board.board[rowSel][colSel].clearSpread(); //if no mines around tile, ask every tile around it to clear and asks other zero tiles to do the same as it's doing now (look at clearSpread())
+      board.board[rowSel][colSel].clearSpread(); //if no mines around tile, ask every tile around it to clear and asks other zero tiles to do the same as it's doing now (look at clearSpread())
     }
     prevMove = inp;
     return true;
