@@ -49,6 +49,11 @@ public class MineSweeper{
     }
     return true;
   }
+  public void clearSpread(int x, int y){ //clears the area where the tile numbers are 0
+    if (tile.getX != 0){
+
+    }
+  }
   public static void main(String[] args) {
     String directions = ""; //prints if user does something wrong
     directions += "Requirements:" + "\n";
