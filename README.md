@@ -34,3 +34,6 @@ Julian: Today, I updated the constructors for Board and Minesweeper, worked on u
 Albert: Today, I changed the toString for board so it can include a much larger range. It can go from 27^2 vertically to 99 horizontally.
 
 Julian: Today, I finished writing the makeMove() method in MineSweeper that processes the user's move input (what they type in to make a move) and wrote a new method isCleared() in Tile.
+
+# 09.01.2019
+Julian: Today, I finalized makeMove() (method that handles user's move inputs) and worked on receiving user inputs using the Scanner class in main().
