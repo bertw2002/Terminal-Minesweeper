@@ -1,6 +1,6 @@
 import java.util.Random;
 public class Board{
-  private Tile[][] board; //makes the actual Board
+  public Tile[][] board; //makes the actual Board
   private int hsize; //horizontal size
   private int vsize; //vertical size
   public int numFlags; //number of flags remaining
@@ -20,6 +20,7 @@ public class Board{
             board[q][w] = new Tile(mineGen, q, w);
         }
     }
+    assignNumbers();
   }
   public Board(String difficulty) { //constructor that implements presets based on difficulty
 	if(difficulty.toLowerCase() == "easy") {
@@ -51,6 +52,7 @@ public class Board{
             board[q][w] = new Tile(mineGen, q, w);
         }
     }
+    assignNumbers();
   }
   public int rowCount() {return hsize;}
   public int colCount() {return vsize;}
