@@ -8,6 +8,7 @@ public class MineSweeper{
   private double startTime; //time started
   private String prevMove; //user's previous move
   public int movesDone; //number of moves the user made so far
+  private boolean won;
   public MineSweeper(String diff){
     difficulty = diff;
     board = new Board(difficulty);
@@ -34,32 +35,44 @@ public class MineSweeper{
     colSel += (Character.getNumericValue(inp.charAt(2))) * 10; //first num digit
     colSel += Character.getNumericValue(inp.charAt(3)); //second num digit
     if(inp.charAt(4) == 'f') { //if user chose to flag
-      if(board.board[rowSel][colSel].isCleared()) {System.out.println("Tile already cleared"); return true;} //can't flag cleared tile
+      if(board.board[rowSel][colSel].isCleared()) {System.out.println("Tile already cleared"); prevMove = inp; return true;} //can't flag cleared tile
       board.numFlags--;
       board.board[rowSel][colSel].flag();
     }
     if(inp.charAt(4) == 'u') { //is user chose to unflag
-      if(board.board[rowSel][colSel].isCleared()) {System.out.println("Can't unflag this tile"); return true;} //can't unflag clear tile
+      if(board.board[rowSel][colSel].isCleared()) {System.out.println("Can't unflag this tile"); prevMove = inp; return true;} //can't unflag clear tile
       board.numFlags++;
       board.board[rowSel][colSel].unflag();
     }
     if(inp.charAt(4) == 'c') { //if user chose to clear
-      if(board.board[rowSel][colSel].isFlagged()) {System.out.println("Unflag this tile to clear"); return true;} //can't clear flagged tile
-      gameOver = board.board[rowSel][colSel].clear(); //if mine hit, gameOver becomes false
+      if(board.board[rowSel][colSel].isFlagged()) {System.out.println("Unflag this tile to clear"); prevMove = inp; return true;} //can't clear flagged tile
+      if(board.board[rowSel][colSel].isMine()) {gameOver = board.board[rowSel][colSel].clear(); prevMove = inp; return false;} //if mine hit, gameOver becomes false
+      if(board.board[rowSel][colSel].getTileNum() != 0) {board.board[rowSel][colSel].clear(); prevMove = inp; return true;} //if tile has mine around it, just clear it
+      board.board[rowSel][colSel].clear(); //if no mines around tile, clear
+      //board.board[rowSel][colSel].clearSpread(); //if no mines around tile, ask every tile around it to clear and asks other zero tiles to do the same as it's doing now (look at clearSpread())
     }
+    prevMove = inp;
     return true;
+  }
+  public String toString() {
+    String s = "Time elapsed (seconds): " + (timer / 1000) + "\n";
+    s += "Flags left: " + board.numFlags + "\n";
+    s += "Previous move: " + prevMove + "\n";
+    s += board.toString();
+    return s;
   }
   public static void main(String[] args) {
     String directions = ""; //prints if user does something wrong
     directions += "Requirements:" + "\n";
     directions += "1. If your input length is 1, make sure it states either hard, easy or medium. (capitals don't matter).\n";
     directions += "2. If your input length is 2, make sure it the sizes don't exceed 27 or are letters.";
+    MineSweeper game = null;
     try {
       if (args.length == 1){
-		      MineSweeper game = new MineSweeper(args[0]);
+		      game = new MineSweeper(args[0]);
       }
       else if (args.length == 2){
-		      MineSweeper game = new MineSweeper(args[0], args[1]);
+		      game = new MineSweeper(args[0], args[1]);
       }
       boolean moveVar = true; //turns false if player hits mine
       while(moveVar) {
