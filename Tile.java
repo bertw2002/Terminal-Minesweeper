@@ -23,6 +23,12 @@ public class Tile {
 		Cleared = false;
 		Flagged = false;
 	}
+	public int getX(int x){
+		return ColPos;
+	}
+	public int getY(int y){
+		return RowPos;
+	}
 	public boolean isMine() {
 		return Mine;
 	}
