@@ -1,6 +1,6 @@
 import java.util.Random;
 public class Board{
-  private Tile[][] board; //makes the actual Board
+  public Tile[][] board; //makes the actual Board
   private int hsize; //horizontal size
   private int vsize; //vertical size
   public int numFlags; //number of flags remaining
@@ -33,8 +33,8 @@ public class Board{
 		board = new Tile[hsize][vsize];
 	}
 	else if(difficulty.toLowerCase() == "hard") {
-		hsize = 32;
-		vsize = 32;
+		hsize = 26;
+		vsize = 26;
 		board = new Tile[hsize][vsize];
 	}
 	else { //if the user types something bad
@@ -129,6 +129,15 @@ public class Board{
   }
   public Tile getTile(int xcor, int ycor) {
     return board[xcor][ycor];
+  }
+  public int numOpened() {
+	 int no = 0;
+	 for(int q = 0; q < board.length; q++) {
+		for(int w = 0; w < board[q].length; w++) {
+			if(board[q][w].isOpen()) {no++;}
+		}
+	 }
+	 return no;
   }
   public String toString(){
     String sboard = "  "; //string version of board

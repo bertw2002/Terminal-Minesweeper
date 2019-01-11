@@ -49,28 +49,43 @@ public class MineSweeper{
     }
     return true;
   }
-  public void clearSpread(int x, int y){ //clears the area where the tile numbers are 0
+  /* public void clearSpread(int x, int y){ //clears the area where the tile numbers are 0
     if (tile.getX != 0){
 
     }
+  } */
+  public String toString() {
+	 String s = "Time elapsed (seconds): " + timer + "\n";
+	 s += board.toString();
+	 s += "\n";
+	 s += "Previous move: " + prevMove + "\n";
+	 return s;
   }
   public static void main(String[] args) {
     String directions = ""; //prints if user does something wrong
     directions += "Requirements:" + "\n";
     directions += "1. If your input length is 1, make sure it states either hard, easy or medium. (capitals don't matter).\n";
     directions += "2. If your input length is 2, make sure it the sizes don't exceed 27 or are letters.";
+	MineSweeper game = null;
     try {
       if (args.length == 1){
-		      MineSweeper game = new MineSweeper(args[0]);
+		      game = new MineSweeper(args[0]);
       }
       else if (args.length == 2){
-		      MineSweeper game = new MineSweeper(args[0], args[1]);
+		      game = new MineSweeper(args[0], args[1]);
       }
       boolean moveVar = true; //turns false if player hits mine
-      while(moveVar) {
+      while(moveVar || (game.board.numFlags != 0 && game.board.numOpened() != (game.board.rowCount() * game.board.colCount()))) { //while the player hasn't hit a mine or hasn't opened all tiles
         Scanner sc = new Scanner(System.in);
         moveVar = game.makeMove(sc.nextLine());
       }
+	  System.out.println(game.toString());
+	  if(!moveVar) { //if game over, mine hit
+		  System.out.println("Game over! You hit a mine!");
+	  }
+	  else {
+		 System.out.println("You win! Time: " + (game.timer / 1000) + " seconds");		 
+	  }
     }
     catch (Exception e){
       System.out.println(directions);
