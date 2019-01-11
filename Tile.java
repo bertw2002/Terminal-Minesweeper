@@ -23,8 +23,17 @@ public class Tile {
 		Cleared = false;
 		Flagged = false;
 	}
+	public int getX(){
+		return ColPos;
+	}
+	public int getY(){
+		return RowPos;
+	}
 	public boolean isMine() {
 		return Mine;
+	}
+	public boolean isFlagged() {
+		return Flagged;
 	}
 	public void setOpen(){
 		Open = true;
@@ -50,7 +59,9 @@ public class Tile {
 			Open = true;
 			Flagged = true;
 		}
-
+	}
+	public boolean isCleared() {
+		return Cleared;
 	}
 	public boolean isOpen() {
 		return Open;

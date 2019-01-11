@@ -18,7 +18,7 @@ public class Driver{
     System.out.println(""+rn.nextInt(5));
     System.out.println(""+rn.nextInt(5));
     System.out.println("testing board class");
-    Board board = new Board(20, 20);
+    Board board = new Board(50, 50);
     System.out.println(board);
     System.out.println("" + (6 % 7));
     int x = 10;
