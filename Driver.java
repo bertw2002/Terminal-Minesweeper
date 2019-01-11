@@ -20,5 +20,11 @@ public class Driver{
     System.out.println("testing board class");
     Board board = new Board(20, 20);
     System.out.println(board);
+    System.out.println("" + (6 % 7));
+    int x = 10;
+    while (x > 5){
+      x -= 10;
+      System.out.println("hjello wordl");
+    }
   }
 }
