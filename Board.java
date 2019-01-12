@@ -244,7 +244,7 @@ public class Board{
 	 return no;
   }
   public String toString(){
-    String sboard = "  "; //string version of board
+    String sboard = " "; //string version of board
     int counter = 1;
     char y1 = 'A'; //alphabet placed vertically first row
     char y2 = 'A'; //alphabet placed vertically second row
@@ -257,7 +257,7 @@ public class Board{
       }
       if (hor != 0){
         sboard += " " + x1;
-      }else{sboard += x1;}
+      }else{sboard += "  " + x1;}
       counter ++;
     }
     sboard += "\n";
@@ -269,7 +269,7 @@ public class Board{
         x2 = 0;
       }
       if (hor != 0){sboard += " " + x2;}
-      else{sboard += x2;}
+      else{sboard += " "+ x2;}
       x2 ++;
       counter ++;
     }

@@ -66,9 +66,6 @@ public class Tile {
 	public boolean isCleared() {
 		return Cleared;
 	}
-	public boolean isOpen() {
-		return Open;
-	}
 	public void unflag() {
 		Open = false;
 		Flagged = false;
