@@ -132,7 +132,7 @@ public class Board{
   public Tile getTile(int xcor, int ycor) {
     return board[xcor][ycor];
   }
-  public boolean isZero(int x, int y){
+  public int isZero(int x, int y){
     int numZeros = 0;//number of zeros surrounding tile.
     boolean first = true;
     if (x != 0){
@@ -224,13 +224,15 @@ public class Board{
       }
     }
 
-    return !first;
+    return numZeros;
   }
   public void clearSpread(int x, int y){
     if (x > hsize - 1 || y > vsize - 1){
       throw new IndexOutOfBoundsException();
     }
-    
+    for(int counter = 0; counter < isZero(x, y); counter++){
+      clearSpread(xZero, yZero);
+    }
   }
   public int numOpened() {
 	 int no = 0;
