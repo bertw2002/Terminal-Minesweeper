@@ -18,7 +18,8 @@ public class Driver{
     System.out.println(""+rn.nextInt(5));
     System.out.println(""+rn.nextInt(5));
     System.out.println("testing board class");
-    Board board = new Board(50, 50);
+    Board board = new Board(10, 30);
+    System.out.println(board.getHsize() + "");
     System.out.println(board);
     board.isZero(3, 4);
     System.out.println(board);

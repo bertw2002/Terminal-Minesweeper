@@ -133,12 +133,18 @@ public class Board{
     return board[xcor][ycor];
   }
   public int isZero(int x, int y){
+    if (x > hsize - 1 || y > vsize - 1){
+      throw new IndexOutOfBoundsException();
+    }
+    if (board[y][x].isOpen() == false){
+      board[y][x].setOpen();
+    }
     int numZeros = 0;//number of zeros surrounding tile.
     boolean first = true;
     if (x != 0){
-      if (board[x - 1][y].getTileNum() == 0 || board[x - 1][y].isOpen()){
+      if (board[y][x - 1].getTileNum() == 0 || !board[x - 1][y].isOpen()){
         numZeros++;
-        board[x-1][y].setOpen();
+        board[y][x - 1].setOpen();
         if (first){
           xZero = x - 1;
           yZero = y;
@@ -147,9 +153,9 @@ public class Board{
       }
     }
     if (y != 0){
-      if (board[x][y - 1].getTileNum() == 0|| board[x][y - 1].isOpen()){
+      if (board[y - 1][x].getTileNum() == 0|| !board[x][y - 1].isOpen()){
         numZeros++;
-        board[x][y - 1].setOpen();
+        board[y - 1][x].setOpen();
         if (first){
           xZero = x;
           yZero = y - 1;
@@ -158,9 +164,9 @@ public class Board{
       }
     }
     if (x != hsize - 1){
-      if (board[x + 1][y].getTileNum() == 0|| board[x + 1][y].isOpen()){
+      if (board[y][x + 1].getTileNum() == 0|| !board[x + 1][y].isOpen()){
         numZeros++;
-        board[x + 1][y].setOpen();
+        board[y][x + 1].setOpen();
         if (first){
           xZero = x + 1;
           yZero = y;
@@ -169,9 +175,9 @@ public class Board{
       }
     }
     if (y != vsize - 1){
-      if (board[x][y + 1].getTileNum() == 0 || board[x][y + 1].isOpen()){
+      if (board[y + 1][x].getTileNum() == 0 || !board[x][y + 1].isOpen()){
         numZeros++;
-        board[x][y + 1].setOpen();
+        board[y + 1][x].setOpen();
         if (first){
           xZero = x + 1;
           yZero = y;
@@ -180,9 +186,9 @@ public class Board{
       }
     }
     if (x != 0 && y != 0){
-      if (board[x - 1][y - 1].getTileNum() == 0|| board[x - 1][y - 1].isOpen()){
+      if (board[y - 1][x - 1].getTileNum() == 0|| !board[x - 1][y - 1].isOpen()){
         numZeros++;
-        board[x - 1][y - 1].setOpen();
+        board[y - 1][x - 1].setOpen();
         if (first){
           xZero = x - 1;
           yZero = y - 1;
@@ -191,9 +197,9 @@ public class Board{
       }
     }
     if (x != 0 && y != vsize - 1){
-      if (board[x - 1][y + 1].getTileNum() == 0 || board[x - 1][y + 1].isOpen()){
+      if (board[y + 1][x - 1].getTileNum() == 0 || !board[x - 1][y + 1].isOpen()){
         numZeros++;
-        board[x - 1][y + 1].setOpen();
+        board[y + 1][x - 1].setOpen();
         if (first){
           xZero = x - 1;
           yZero = y + 1;
@@ -201,10 +207,10 @@ public class Board{
         }
       }
     }
-    if(x != vsize - 1 && y != vsize - 1){
-      if (board[x + 1][y + 1].getTileNum() == 0 || board[x + 1][y + 1].isOpen()){
+    if(x != hsize - 1 && y != vsize - 1){
+      if (board[y + 1][x + 1].getTileNum() == 0 || !board[x + 1][y + 1].isOpen()){
         numZeros++;
-        board[x + 1][y + 1].setOpen();
+        board[y + 1][x + 1].setOpen();
         if (first){
           xZero = x + 1;
           yZero = y + 1;
@@ -212,10 +218,10 @@ public class Board{
         }
       }
     }
-    if(x != vsize - 1 && y != 0){
-      if (board[x + 1][y - 1].getTileNum() == 0 || board[x + 1][y - 1].isOpen()){
+    if(x != hsize - 1 && y != 0){
+      if (board[y - 1][x + 1].getTileNum() == 0 || !board[x + 1][y - 1].isOpen()){
         numZeros++;
-        board[x + 1][y - 1].setOpen();
+        board[y - 1][x + 1].setOpen();
         if (first){
           xZero = x + 1;
           yZero = y - 1;
@@ -226,11 +232,21 @@ public class Board{
 
     return numZeros;
   }
+  public int getHsize(){
+    return hsize;
+  }
+  public int getVsize(){
+    return vsize;
+  }
   public void clearSpread(int x, int y){
     if (x > hsize - 1 || y > vsize - 1){
       throw new IndexOutOfBoundsException();
     }
+    /*
     for(int counter = 0; counter < isZero(x, y); counter++){
+      clearSpread(xZero, yZero);
+    }*/
+    if (isZero(x, y) > 3){
       clearSpread(xZero, yZero);
     }
   }
@@ -250,7 +266,7 @@ public class Board{
     char y2 = 'A'; //alphabet placed vertically second row
     int x1 = 0; //horizontal locators first row.
     int x2 = 0; //horizontal locators second row.
-    for (int hor = 0; hor < hsize; hor ++){
+    for (int hor = 0; hor < vsize; hor ++){
       if (counter == 11){
         counter = 1;
         x1 ++;
@@ -263,7 +279,7 @@ public class Board{
     sboard += "\n";
     sboard += "  ";
     counter = 0;
-    for (int hor = 0; hor < hsize; hor ++){
+    for (int hor = 0; hor < vsize; hor ++){
       if (counter == 10){
         counter = 0;
         x2 = 0;
@@ -286,7 +302,7 @@ public class Board{
       if (y2 == 'Z'){y2 = 'A' - 1;}
       sboard += "|";
       for (int y = 0; y < vsize; y ++){
-        if (y != hsize - 1){sboard += board[x][y].toString() + " ";}
+        if (y != vsize - 1){sboard += board[x][y].toString() + " ";}
         else{sboard += board[x][y].toString();}
       }
       y2 ++;
