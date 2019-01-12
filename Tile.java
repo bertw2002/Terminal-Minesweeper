@@ -38,6 +38,9 @@ public class Tile {
 	public void setOpen(){
 		Open = true;
 	}
+	public boolean isOpen(){
+		return Open;
+	}
 	public void setMine() {
 	    Mine = true;
 	}

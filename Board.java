@@ -132,11 +132,11 @@ public class Board{
   public Tile getTile(int xcor, int ycor) {
     return board[xcor][ycor];
   }
-  public int isZero(int x, int y){
+  public boolean isZero(int x, int y){
     int numZeros = 0;//number of zeros surrounding tile.
-    boolean first = false;
+    boolean first = true;
     if (x != 0){
-      if (board[x - 1][y].getTileNum() == 0){
+      if (board[x - 1][y].getTileNum() == 0 || board[x - 1][y].isOpen()){
         numZeros++;
         board[x-1][y].setOpen();
         if (first){
@@ -147,7 +147,7 @@ public class Board{
       }
     }
     if (y != 0){
-      if (board[x][y - 1].getTileNum() == 0){
+      if (board[x][y - 1].getTileNum() == 0|| board[x][y - 1].isOpen()){
         numZeros++;
         board[x][y - 1].setOpen();
         if (first){
@@ -158,7 +158,7 @@ public class Board{
       }
     }
     if (x != hsize - 1){
-      if (board[x + 1][y].getTileNum() == 0){
+      if (board[x + 1][y].getTileNum() == 0|| board[x + 1][y].isOpen()){
         numZeros++;
         board[x + 1][y].setOpen();
         if (first){
@@ -169,7 +169,7 @@ public class Board{
       }
     }
     if (y != vsize - 1){
-      if (board[x][y + 1].getTileNum() == 0){
+      if (board[x][y + 1].getTileNum() == 0 || board[x][y + 1].isOpen()){
         numZeros++;
         board[x][y + 1].setOpen();
         if (first){
@@ -180,7 +180,7 @@ public class Board{
       }
     }
     if (x != 0 && y != 0){
-      if (board[x - 1][y - 1].getTileNum() == 0){
+      if (board[x - 1][y - 1].getTileNum() == 0|| board[x - 1][y - 1].isOpen()){
         numZeros++;
         board[x - 1][y - 1].setOpen();
         if (first){
@@ -191,7 +191,7 @@ public class Board{
       }
     }
     if (x != 0 && y != vsize - 1){
-      if (board[x - 1][y + 1].getTileNum() == 0){
+      if (board[x - 1][y + 1].getTileNum() == 0 || board[x - 1][y + 1].isOpen()){
         numZeros++;
         board[x - 1][y + 1].setOpen();
         if (first){
@@ -202,7 +202,7 @@ public class Board{
       }
     }
     if(x != vsize - 1 && y != vsize - 1){
-      if (board[x + 1][y + 1].getTileNum() == 0){
+      if (board[x + 1][y + 1].getTileNum() == 0 || board[x + 1][y + 1].isOpen()){
         numZeros++;
         board[x + 1][y + 1].setOpen();
         if (first){
@@ -213,7 +213,7 @@ public class Board{
       }
     }
     if(x != vsize - 1 && y != 0){
-      if (board[x + 1][y - 1].getTileNum() == 0){
+      if (board[x + 1][y - 1].getTileNum() == 0 || board[x + 1][y - 1].isOpen()){
         numZeros++;
         board[x + 1][y - 1].setOpen();
         if (first){
@@ -224,13 +224,13 @@ public class Board{
       }
     }
 
-    return numZeros;
+    return !first;
   }
   public void clearSpread(int x, int y){
     if (x > hsize - 1 || y > vsize - 1){
       throw new IndexOutOfBoundsException();
     }
-
+    
   }
   public int numOpened() {
 	 int no = 0;
