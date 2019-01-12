@@ -6,6 +6,51 @@ public class Board{
   public int numFlags; //number of flags remaining
   public int xZero; //x coordinate of the empty tile
   public int yZero; //y coordinate of the empty tile
+  //finds actual tile num, counting the number of mines around it.
+  public int findTileNum(int x, int y){
+    int minecounter = 0;
+    if (x != 0){
+      if (board[y][x - 1].getTileNum() == -1){
+        minecounter++;
+      }
+    }
+    if (y != 0){
+      if (board[y - 1][x].getTileNum() == -1){
+        minecounter++;
+      }
+    }
+    if (x != hsize - 1){
+      if (board[y][x + 1].getTileNum() == 0){
+        minecounter++;
+      }
+    }
+    if (y != vsize - 1){
+      if (board[y + 1][x].getTileNum() == 0){
+        minecounter++;
+      }
+    }
+    if (x != 0 && y != 0){
+      if (board[y - 1][x - 1].getTileNum() == 0){
+        minecounter++;
+      }
+    }
+    if (x != 0 && y != vsize - 1){
+      if (board[y + 1][x - 1].getTileNum() == 0){
+        minecounter++;
+      }
+    }
+    if(x != hsize - 1 && y != vsize - 1){
+      if (board[y + 1][x + 1].getTileNum() == 0){
+        minecounter++;
+      }
+    }
+    if(x != hsize - 1 && y != 0){
+      if (board[y - 1][x + 1].getTileNum() == 0){
+        minecounter++;
+      }
+    }
+    return minecounter;
+  }
   public Board(int verticalsize, int horizontalsize){ //constructor for custom board specs
 	if(verticalsize < 2 || horizontalsize < 2) {throw new IllegalArgumentException();}
     hsize = horizontalsize;
@@ -20,6 +65,13 @@ public class Board{
             mineGen = false;
             if(ri < -20) {mineGen = true;}
             board[q][w] = new Tile(mineGen, q, w);
+        }
+    }
+    for(int q = 0; q < hsize; q++) {
+        for(int w = 0; w < vsize; w++) {
+          if (board[q][w].getTileNum() != -1){
+            board[q][w].setTileNum(findTileNum(q, w));
+          }
         }
     }
   }
@@ -301,7 +353,15 @@ public class Board{
       counter ++;
     }
     sboard += "\n";
+    sboard += "   ";
+    //makes a line between the locators and board to make it more aesthetic.
+    for (int x = 0;x < vsize; x++){
+      if (x != vsize - 1){sboard += "__";}
+      else{sboard += "_";}
+    }
+    sboard += "\n";
     counter = 0;
+
     for (int x = 0; x < hsize; x ++){
       if (counter == 26){
         counter = 0;
@@ -318,7 +378,14 @@ public class Board{
       }
       y2 ++;
       sboard += "|" + "\n";
+
       counter ++;
+    }
+    sboard += "   ";
+    //line under box to make it more aesthetic
+    for (int x = 0;x < vsize; x++){
+      if (x != vsize - 1){sboard += "__";}
+      else{sboard += "_";}
     }
     return sboard;
   }
