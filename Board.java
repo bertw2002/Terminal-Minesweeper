@@ -19,33 +19,33 @@ public class Board{
         minecounter++;
       }
     }
-    if (x != hsize - 1){
-      if (board[y][x + 1].getTileNum() == 0){
+    if (x != vsize - 1){
+      if (board[y][x + 1].getTileNum() == -1){
         minecounter++;
       }
     }
-    if (y != vsize - 1){
-      if (board[y + 1][x].getTileNum() == 0){
+    if (y != hsize - 1){
+      if (board[y + 1][x].getTileNum() == -1){
         minecounter++;
       }
     }
     if (x != 0 && y != 0){
-      if (board[y - 1][x - 1].getTileNum() == 0){
+      if (board[y - 1][x - 1].getTileNum() == -1){
         minecounter++;
       }
     }
-    if (x != 0 && y != vsize - 1){
-      if (board[y + 1][x - 1].getTileNum() == 0){
+    if (x != 0 && y != hsize - 1){
+      if (board[y + 1][x - 1].getTileNum() == -1){
         minecounter++;
       }
     }
-    if(x != hsize - 1 && y != vsize - 1){
-      if (board[y + 1][x + 1].getTileNum() == 0){
+    if(x != vsize - 1 && y != hsize - 1){
+      if (board[y + 1][x + 1].getTileNum() == -1){
         minecounter++;
       }
     }
     if(x != hsize - 1 && y != 0){
-      if (board[y - 1][x + 1].getTileNum() == 0){
+      if (board[y - 1][x + 1].getTileNum() == -1){
         minecounter++;
       }
     }
@@ -63,14 +63,17 @@ public class Board{
         for(int w = 0; w < vsize; w++) {
             ri = rn.nextInt() % 32;
             mineGen = false;
-            if(ri < -20) {mineGen = true;}
+            if(ri < -20) {
+              mineGen = true;
+            }
             board[q][w] = new Tile(mineGen, q, w);
+            if (mineGen == true){board[q][w].setTileNum(-1);}
         }
     }
-    for(int q = 0; q < hsize; q++) {
-        for(int w = 0; w < vsize; w++) {
-          if (board[q][w].getTileNum() != -1){
-            board[q][w].setTileNum(findTileNum(q, w));
+    for(int q = 0; q < vsize; q++) {
+        for(int w = 0; w < hsize; w++) {
+          if (board[w][q].getTileNum() != -1){
+            board[w][q].setTileNum(findTileNum(q, w));
           }
         }
     }
