@@ -13,16 +13,30 @@ public class Driver{
     System.out.println("testing out random int");
     int ri  = 0;
     Random rn = new Random();
-    ri = rn.nextInt() % 3;
-    System.out.println("" +ri);
-    System.out.println(""+rn.nextInt(5));
-    System.out.println(""+rn.nextInt(5));
+    for(int q = 0; q < 3; q++) { //loops through board[][], initializes every tile and puts down a mine per every 6.4 tiles (ideally)
+        for(int w = 0; w < 3; w++) {
+            ri = rn.nextInt() % 64 + 1;
+            System.out.println(ri);
+        }
+    }
     System.out.println("testing board class");
-    Board board = new Board(10, 30);
-    System.out.println(board.getHsize() + "");
+    Board board = new Board(30, 30);
+    for (int x = 0; x < board.getHsize(); x++){
+      for (int y = 0; y < board.getVsize();y++){
+        board.getTile(x, y).setOpen();
+      }
+    }
+
+    System.out.println("making all tiles open:");
     System.out.println(board);
-    board.isZero(3, 4);
+    System.out.println("testing iszero should print 8, 4 4: " + board.isZero(4,4));
+    System.out.println("testing iszero print 0, 4 4: " + board.isZero(4,4));
     System.out.println(board);
+    System.out.println("testing clearspread");
+    Board board2 = new Board(20, 20);
+    board2.clearSpread(3, 3);
+    System.out.println(board2);
+
 
   }
 }

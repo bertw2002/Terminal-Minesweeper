@@ -16,9 +16,9 @@ public class Board{
     boolean mineGen = false;
     for(int q = 0; q < hsize; q++) { //loops through board[][], initializes every tile and puts down a mine per every 6.4 tiles (ideally)
         for(int w = 0; w < vsize; w++) {
-            ri = rn.nextInt() % 64 + 1;
+            ri = rn.nextInt() % 32;
             mineGen = false;
-            if(ri < 10) {mineGen = true;}
+            if(ri < -20) {mineGen = true;}
             board[q][w] = new Tile(mineGen, q, w);
         }
     }
@@ -142,94 +142,105 @@ public class Board{
     int numZeros = 0;//number of zeros surrounding tile.
     boolean first = true;
     if (x != 0){
-      if (board[y][x - 1].getTileNum() == 0 || !board[x - 1][y].isOpen()){
+      if (board[y][x - 1].getTileNum() == 0  || (!board[y][x - 1].isOpen() && board[y][x - 1].getTileNum() != -1)){
         numZeros++;
-        board[y][x - 1].setOpen();
-        if (first){
+
+        if (first && (!board[y][x - 1].isOpen() && board[y][x - 1].getTileNum() == 0)){
           xZero = x - 1;
           yZero = y;
           first = false;
         }
+        board[y][x - 1].setOpen();
       }
     }
     if (y != 0){
-      if (board[y - 1][x].getTileNum() == 0|| !board[x][y - 1].isOpen()){
+      if (board[y - 1][x].getTileNum() == 0|| (!board[y - 1][x].isOpen()&& board[y - 1][x].getTileNum() != -1)){
         numZeros++;
-        board[y - 1][x].setOpen();
-        if (first){
+
+        if (first && (!board[y - 1][x].isOpen() && board[y - 1][x].getTileNum() == 0)){
           xZero = x;
           yZero = y - 1;
           first = false;
         }
+        board[y - 1][x].setOpen();
       }
     }
     if (x != hsize - 1){
-      if (board[y][x + 1].getTileNum() == 0|| !board[x + 1][y].isOpen()){
+      if (board[y][x + 1].getTileNum() == 0|| (!board[y][x + 1].isOpen()&& board[y][x + 1].getTileNum() != -1)){
         numZeros++;
-        board[y][x + 1].setOpen();
-        if (first){
+
+        if (first && (!board[y][x + 1].isOpen() && board[y][x + 1].getTileNum() == 0)){
           xZero = x + 1;
           yZero = y;
           first = false;
         }
+        board[y][x + 1].setOpen();
       }
     }
     if (y != vsize - 1){
-      if (board[y + 1][x].getTileNum() == 0 || !board[x][y + 1].isOpen()){
+      if (board[y + 1][x].getTileNum() == 0 || (!board[y + 1][x].isOpen()&& board[y + 1][x].getTileNum() != -1)){
         numZeros++;
-        board[y + 1][x].setOpen();
-        if (first){
+
+        if (first && (!board[y + 1][x].isOpen() && board[y + 1][x].getTileNum() == 0)){
           xZero = x + 1;
           yZero = y;
           first = false;
         }
+        board[y + 1][x].setOpen();
       }
     }
     if (x != 0 && y != 0){
-      if (board[y - 1][x - 1].getTileNum() == 0|| !board[x - 1][y - 1].isOpen()){
+      if (board[y - 1][x - 1].getTileNum() == 0|| (!board[y - 1][x - 1].isOpen()&& board[y - 1][x - 1].getTileNum() != -1)){
         numZeros++;
-        board[y - 1][x - 1].setOpen();
-        if (first){
+
+        if (first && (!board[y - 1][x - 1].isOpen() && board[y - 1][x - 1].getTileNum() == 0)){
           xZero = x - 1;
           yZero = y - 1;
           first = false;
         }
+        board[y - 1][x - 1].setOpen();
       }
     }
     if (x != 0 && y != vsize - 1){
-      if (board[y + 1][x - 1].getTileNum() == 0 || !board[x - 1][y + 1].isOpen()){
+      if (board[y + 1][x - 1].getTileNum() == 0 || (!board[y + 1][x - 1].isOpen()&& board[y + 1][x - 1].getTileNum() != -1)){
         numZeros++;
-        board[y + 1][x - 1].setOpen();
-        if (first){
+
+        if (first && (!board[y + 1][x - 1].isOpen() && board[y + 1][x - 1].getTileNum() == 0)){
           xZero = x - 1;
           yZero = y + 1;
           first = false;
         }
+        board[y + 1][x - 1].setOpen();
       }
     }
     if(x != hsize - 1 && y != vsize - 1){
-      if (board[y + 1][x + 1].getTileNum() == 0 || !board[x + 1][y + 1].isOpen()){
+      if (board[y + 1][x + 1].getTileNum() == 0 || (!board[y + 1][x + 1].isOpen()&& board[y + 1][x + 1].getTileNum() != -1)){
         numZeros++;
-        board[y + 1][x + 1].setOpen();
-        if (first){
+
+        if (first && (!board[y + 1][x + 1].isOpen() && board[y + 1][x + 1].getTileNum() == 0)){
           xZero = x + 1;
           yZero = y + 1;
           first = false;
         }
+        board[y + 1][x + 1].setOpen();
       }
     }
     if(x != hsize - 1 && y != 0){
-      if (board[y - 1][x + 1].getTileNum() == 0 || !board[x + 1][y - 1].isOpen()){
+      if (board[y - 1][x + 1].getTileNum() == 0 || (!board[y - 1][x + 1].isOpen()&& board[y - 1][x + 1].getTileNum() != -1)){
         numZeros++;
-        board[y - 1][x + 1].setOpen();
-        if (first){
+
+        if (first && (!board[y - 1][x + 1].isOpen() && board[y - 1][x + 1].getTileNum() == 0)){
           xZero = x + 1;
           yZero = y - 1;
           first = false;
         }
+        board[y - 1][x + 1].setOpen();
       }
     }
 
+    if (first){
+      numZeros = 0;
+    }
     return numZeros;
   }
   public int getHsize(){
@@ -246,7 +257,7 @@ public class Board{
     for(int counter = 0; counter < isZero(x, y); counter++){
       clearSpread(xZero, yZero);
     }*/
-    if (isZero(x, y) > 3){
+    if (isZero(x, y) > 0){
       clearSpread(xZero, yZero);
     }
   }
