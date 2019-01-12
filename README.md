@@ -44,4 +44,4 @@ Albert: Today, I started the clearSpread() method which clears tiles with no min
 # 11.01.2019
 Julian: Today, I wrote the case the winning the game in the minesweeper main() and edited the acess modifiers of some class variables to make writing code easier.
 
-Albert: Today, I made a change to the tile class, adding isOpen. Also, I finished coding clearSpread and the helper method isZero. 
+Albert: Today, I made a change to the tile class, adding isOpen. Also, I finished coding clearSpread and the helper method isZero. I haven't test it yet.
