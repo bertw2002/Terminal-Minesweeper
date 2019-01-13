@@ -37,3 +37,13 @@ Julian: Today, I finished writing the makeMove() method in MineSweeper that proc
 
 # 09.01.2019
 Julian: Today, I finalized makeMove() (method that handles user's move inputs) and worked on receiving user inputs using the Scanner class in main().
+
+# 10.01.2019
+Albert: Today, I started the clearSpread() method which clears tiles with no mines around them. I also added a getx and gety to the tile class to make life easier. 
+
+Julian: Today, I had to rewrite some code because the changes I pushed in school didn't push to this repo for some reason.
+
+# 11.01.2019
+Julian: Today, I wrote the case the winning the game in the minesweeper main() and edited the acess modifiers of some class variables to make writing code easier.
+
+Albert: Today, I made a change to the tile class, adding isOpen. Also, I finished coding clearSpread and the helper method isZero. I haven't test it yet.
