@@ -194,6 +194,9 @@ public class Board{
     if (board[y][x].isOpen() == false){
       board[y][x].setOpen();
     }
+    if (board[y][x].getTileNum() > 0){
+      return 0;
+    }
     int numZeros = 0;//number of zeros surrounding tile.
     boolean first = true;
     if (x != 0){
@@ -220,7 +223,7 @@ public class Board{
         board[y - 1][x].setOpen();
       }
     }
-    if (x != hsize - 1){
+    if (x != vsize - 1){
       if (board[y][x + 1].getTileNum() == 0|| (!board[y][x + 1].isOpen()&& board[y][x + 1].getTileNum() != -1)){
         numZeros++;
 
@@ -232,7 +235,7 @@ public class Board{
         board[y][x + 1].setOpen();
       }
     }
-    if (y != vsize - 1){
+    if (y != hsize - 1){
       if (board[y + 1][x].getTileNum() == 0 || (!board[y + 1][x].isOpen()&& board[y + 1][x].getTileNum() != -1)){
         numZeros++;
 
@@ -256,7 +259,7 @@ public class Board{
         board[y - 1][x - 1].setOpen();
       }
     }
-    if (x != 0 && y != vsize - 1){
+    if (x != 0 && y != hsize - 1){
       if (board[y + 1][x - 1].getTileNum() == 0 || (!board[y + 1][x - 1].isOpen()&& board[y + 1][x - 1].getTileNum() != -1)){
         numZeros++;
 
@@ -268,7 +271,7 @@ public class Board{
         board[y + 1][x - 1].setOpen();
       }
     }
-    if(x != hsize - 1 && y != vsize - 1){
+    if(x != vsize - 1 && y != hsize - 1){
       if (board[y + 1][x + 1].getTileNum() == 0 || (!board[y + 1][x + 1].isOpen()&& board[y + 1][x + 1].getTileNum() != -1)){
         numZeros++;
 
@@ -280,7 +283,7 @@ public class Board{
         board[y + 1][x + 1].setOpen();
       }
     }
-    if(x != hsize - 1 && y != 0){
+    if(x != vsize - 1 && y != 0){
       if (board[y - 1][x + 1].getTileNum() == 0 || (!board[y - 1][x + 1].isOpen()&& board[y - 1][x + 1].getTileNum() != -1)){
         numZeros++;
 
@@ -308,12 +311,17 @@ public class Board{
     if (x > hsize - 1 || y > vsize - 1){
       throw new IndexOutOfBoundsException();
     }
-    /*
-    for(int counter = 0; counter < isZero(x, y); counter++){
-      clearSpread(xZero, yZero);
-    }*/
-    if (isZero(x, y) > 0){
-      clearSpread(xZero, yZero);
+
+
+    while (isZero(x, y) != 0){
+      if (x != 0){clearSpread(x - 1, y);}
+      if (x != vsize - 1 && y != 0){clearSpread(x + 1, y - 1);}
+      if (x != vsize - 1 && y != hsize - 1){clearSpread(x + 1, y + 1);}
+      if (x != 0 && y != hsize - 1){clearSpread(x - 1, y + 1);}
+      if (y != 0){clearSpread(x, y - 1);}
+      if (y != 0 && x != 0){clearSpread(x - 1,y - 1);}
+      if (x != vsize - 1){clearSpread(x + 1, y);}
+      if (y != hsize - 1){clearSpread(x, y + 1);}
     }
   }
   public int numOpened() {
