@@ -59,17 +59,21 @@ public class Tile {
 	}
 	public void flag() {
 		if (Open == false){
-			Open = true;
 			Flagged = true;
+			Open = true;
+		
 		}
 	}
 	public boolean isCleared() {
 		return Cleared;
 	}
 	public void unflag() {
-		Open = false;
-		Flagged = false;
+		if (Flagged == true){
+			Open = false;
+			Flagged = false;
+		}
 	}
+
 	public String toString() {
 		if(!Open) {return "_";}
 		if(Flagged) {return "🚩";}
