@@ -75,11 +75,12 @@ public class MineSweeper{
 		      game = new MineSweeper(args[0], args[1]);
       }
       boolean moveVar = true; //turns false if player hits mine
+	  System.out.println(game.toString());
       while(moveVar || (game.board.numFlags != 0 && game.board.numOpened() != (game.board.rowCount() * game.board.colCount()))) { //while the player hasn't hit a mine or hasn't opened all tiles
         Scanner sc = new Scanner(System.in);
         moveVar = game.makeMove(sc.nextLine());
+		System.out.println(game.toString());
       }
-	  System.out.println(game.toString());
 	  if(!moveVar) { //if game over, mine hit
 		  System.out.println("Game over! You hit a mine!");
 	  }
