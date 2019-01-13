@@ -6,7 +6,7 @@ public class MineSweeper{
   private String difficulty; //difficulty level if applicable
   private boolean gameOver; //is the game over?
   private double startTime; //time started
-  private String prevMove; //user's previous move
+  public String prevMove; //user's previous move
   public int movesDone; //number of moves the user made so far
   public MineSweeper(String diff){
     difficulty = diff;
@@ -46,6 +46,7 @@ public class MineSweeper{
     if(inp.charAt(4) == 'c') { //if user chose to clear
       if(board.board[rowSel][colSel].isFlagged()) {System.out.println("Unflag this tile to clear"); return true;} //can't clear flagged tile
       gameOver = board.board[rowSel][colSel].clear(); //if mine hit, gameOver becomes false
+	  return gameOver;
     }
     return true;
   }
@@ -78,7 +79,9 @@ public class MineSweeper{
 	  System.out.println(game.toString());
       while(moveVar || (game.board.numFlags != 0 && game.board.numOpened() != (game.board.rowCount() * game.board.colCount()))) { //while the player hasn't hit a mine or hasn't opened all tiles
         Scanner sc = new Scanner(System.in);
-        moveVar = game.makeMove(sc.nextLine());
+		String nl = sc.nextLine();
+        moveVar = game.makeMove(nl);
+		game.prevMove = nl;
 		System.out.println(game.toString());
       }
 	  if(!moveVar) { //if game over, mine hit
