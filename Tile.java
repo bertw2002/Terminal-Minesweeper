@@ -64,6 +64,9 @@ public class Tile {
 		
 		}
 	}
+	public void unMine() {
+		Mine = false;
+	}
 	public boolean isCleared() {
 		return Cleared;
 	}

@@ -56,6 +56,7 @@ public class MineSweeper{
     }
   } */
   public String toString() {
+	timer = (System.currentTimeMillis() - startTime) / 1000;
 	 String s = "Time elapsed (seconds): " + timer + "\n";
 	 s += board.toString();
 	 s += "\n";
@@ -66,7 +67,7 @@ public class MineSweeper{
     String directions = ""; //prints if user does something wrong
     directions += "Requirements:" + "\n";
     directions += "1. If your input length is 1, make sure it states either hard, easy or medium. (capitals don't matter).\n";
-    directions += "2. If your input length is 2, make sure it the sizes don't exceed 27 or are letters.";
+    directions += "2. If your input length is 2, make sure it the sizes don't exceed 676 and are numbers.";
 	MineSweeper game = null;
     try {
       if (args.length == 1){
@@ -77,12 +78,62 @@ public class MineSweeper{
       }
       boolean moveVar = true; //turns false if player hits mine
 	  System.out.println(game.toString());
+	  System.out.print("Your move: ");
+	  Scanner fm = new Scanner(System.in); //makes sure that first move is always a tile with no mines around
+	  String firstmove = fm.nextLine();
+	  
+	  int firstmoverow = 0; //first move row selection
+	  firstmoverow += (firstmove.charAt(0) - 65) * 26; //first letter digit
+	  firstmoverow += firstmove.charAt(1) - 65; //second letter digit
+	  int firstmovecol = 0; //first move col selection
+	  firstmovecol += (Character.getNumericValue(firstmove.charAt(2))) * 10; //first num digit
+      firstmovecol += Character.getNumericValue(firstmove.charAt(3)); //second num digit
+	  game.board.board[firstmoverow][firstmovecol].unMine();
+	  if(firstmoverow == 0) { //unMine all tiles around first tile
+		 if(firstmovecol == 0) { //top left
+			 
+		 }
+		 if(firstmovecol == (game.board.vsize - 1)) { //top right
+			 
+		 }
+		 else { //general top
+			 
+		 }
+	  }
+	  if(firstmoverow == (game.board.hsize - 1)) {
+		 if(firstmovecol == 0) { //bottom left
+			 
+		 }
+		 if(firstmovecol == (game.board.vsize - 1)) { //bottom right
+			 
+		 }
+		 else { //general bottom
+			 
+		 }
+	  }
+	  else {
+		 if(firstmovecol == 0) {//general left
+			 
+		 }
+		 if(firstmovecol == (game.board.vsize - 1)) { //general right
+			 
+		 }
+		 else { //surrounded by tiles
+			 
+		 } 
+	  }
+	  
+	  game.makeMove(firstmove);
+	  game.prevMove = firstmove;
+	  System.out.println(game.toString());
+	  System.out.print("Your move: ");
       while(moveVar || (game.board.numFlags != 0 && game.board.numOpened() != (game.board.rowCount() * game.board.colCount()))) { //while the player hasn't hit a mine or hasn't opened all tiles
         Scanner sc = new Scanner(System.in);
 		String nl = sc.nextLine();
         moveVar = game.makeMove(nl);
 		game.prevMove = nl;
 		System.out.println(game.toString());
+		if(moveVar) {System.out.print("Your move: ");}
       }
 	  if(!moveVar) { //if game over, mine hit
 		  System.out.println("Game over! You hit a mine!");
