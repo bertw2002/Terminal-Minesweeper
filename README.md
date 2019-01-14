@@ -81,4 +81,12 @@ Julian: Today, I had to rewrite some code because the changes I pushed in school
 # 11.01.2019
 Julian: Today, I wrote the case the winning the game in the minesweeper main() and edited the acess modifiers of some class variables to make writing code easier.
 
-Albert: Today, I made a change to the tile class, adding isOpen. Also, I finished coding clearSpread and the helper method isZero. I haven't test it yet.
+Albert: Today, I made a change to the tile class, adding isOpen. Also, I finished coding clearSpread and the helper method isZero. I haven't tested it yet.
+
+# 12.01.2019
+Albert: Today, I fixed some errors in the tile class, fixed the horizontal locators in the tostring in the board class, fixed tile numbers so it is displayed correctly, and the clearSpread finally works. I merged my branch into the main.
+
+# 13.01.2019
+Julian: Today, I organized the minesweeper code and started writing the code that makes the first move always result in a clear tile.
+
+Albert: Today, I finished Julian's code so that minesweeper runs without errors and clearSpread can run without errors. Also, I added a method which makes all tiles open after hitting a mine.
