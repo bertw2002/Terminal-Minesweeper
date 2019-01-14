@@ -56,10 +56,13 @@ public class MineSweeper{
         }
 
       }else{
-        if (board.board[rowSel][colSel].isMine()){
-          gameOver = true; //if mine hit, gameOver becomes false
+        if (board.board[colSel][rowSel].isMine()){
+          System.out.println("SDKFJSDLKFSD");
+
+          return true; //if mine hit, gameOver becomes false
         }
       }
+      System.out.println("Number of moves: " + movesDone);
       board.clearSpread(colSel, rowSel);
       movesDone++;
 	    return false;
@@ -93,11 +96,28 @@ public class MineSweeper{
 	 s += "Previous move: " + prevMove + "\n";
 	 return s;
   }
+
+//--------
+  // need function to display all mines after loss
+//--------
+  public void allOpen(){
+    for (int x = 0; x < board.getHsize(); x++){
+      for (int y = 0; y < board.getVsize();y++){
+        board.getTile(x, y).setOpen();
+      }
+    }
+    
+  }
+
   public static void main(String[] args) {
     String directions = ""; //prints if user does something wrong
-    directions += "Requirements:" + "\n";
+    directions += "Requirements for starting the game:" + "\n";
     directions += "1. If your input length is 1, make sure it states either hard, easy or medium. (capitals don't matter).\n";
-    directions += "2. If your input length is 2, make sure it the sizes don't exceed 27 or are letters.";
+    directions += "2. If your input length is 2, make sure it the sizes don't exceed 27 or are letters.\n\n";
+    directions += "Requirements during the game:\n";
+    directions += "1. String input needs to be 5 characters long.\n";
+    directions += "2. First 2 inputs are capital letters and next 2 are numbers, and last is either f, u, or c.\n";
+
 	  MineSweeper game = null;
     try {
       if (args.length == 1){
@@ -108,20 +128,20 @@ public class MineSweeper{
       }
       boolean moveVar = false; //turns false if player hits mine
 	    System.out.println(game.toString());
-      while(!moveVar || (game.board.numFlags != 0 && game.board.numOpened() != (game.board.rowCount() * game.board.colCount()))) { //while the player hasn't hit a mine or hasn't opened all tiles
+      while(!moveVar) { //while the player hasn't hit a mine or hasn't opened all tiles
+      //^^ still have to make more restrictions. Dont forget.
         Scanner sc = new Scanner(System.in);
 		    String nl = sc.nextLine();
         moveVar = game.makeMove(nl);
 
 		    game.prevMove = nl;
 		    System.out.println(game.toString());
+        //still have to implement a congrats if they win.
       }
-	  if(moveVar) { //if game over, mine hit
+      game.allOpen();
+      System.out.println(game.toString());
 		  System.out.println("Game over! You hit a mine!");
-	  }/*
-	  else {
-		 System.out.println("You win! Time: " + (game.timer / 1000) + " seconds");
-   }*/
+
     }
     catch (Exception e){
       System.out.println(directions);
