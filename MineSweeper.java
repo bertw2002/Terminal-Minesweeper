@@ -16,6 +16,9 @@ public class MineSweeper{
 	timer = System.currentTimeMillis() - startTime;
   movesDone = 0;
   }
+  public int getmovesDone(){
+    return movesDone;
+  }
   public MineSweeper(String hl, String vl) {
 	 int horiz = Integer.parseInt(hl);
 	 int vert = Integer.parseInt(vl);
@@ -44,22 +47,47 @@ public class MineSweeper{
       board.board[rowSel][colSel].unflag();
     }
     if(inp.charAt(4) == 'c') { //if user chose to clear
-      if(board.board[rowSel][colSel].isFlagged()) {System.out.println("Unflag this tile to clear"); return true;} //can't clear flagged tile
-      gameOver = board.board[rowSel][colSel].clear(); //if mine hit, gameOver becomes false
-	  board.clearSpread(rowSel, colSel);
-	  return gameOver;
-    }
-    return true;
-  }
-  /* public void clearSpread(int x, int y){ //clears the area where the tile numbers are 0
-    if (tile.getX != 0){
+      if (board.board[rowSel][colSel].isFlagged()) {System.out.println("Unflag this tile to clear"); return false;} //can't clear flagged tile
+      if (movesDone == 0){
+        int x = board.getHsize();
+        int y = board.getVsize();
+        while (board.board[rowSel][colSel].isMine() || board.board[rowSel][colSel].getTileNum() != 0){
+          board = new Board(x, y);
+        }
 
+      }else{
+        if (board.board[rowSel][colSel].isMine()){
+          gameOver = true; //if mine hit, gameOver becomes false
+        }
+      }
+      board.clearSpread(colSel, rowSel);
+      movesDone++;
+	    return false;
     }
-  } */
+
+    return false;
+  }
+/*
+  public int turnindex(String twonumber){ //turns the input value into a readable index. Number version.
+    int firstnum = Integer.parseInt(twonumber.substring(0, 1));
+    int secnum = Integer.parseInt(twonumber.substring(1, 2));
+    int returnval = 0;
+    returnval += firstnum * 10;
+    returnval += secnum;
+    return returnval;
+  }
+  public int turnindexalph(String twoalph){//turns the input value into a readable index. alphabet version.
+    char firstc = twoalph.charAt(0);
+    char sec = twoalph.charAt(1);
+    int firstnum = Character.getNumericValue(firstc) % 65;
+    int secnum = Character.getNumericValue(sec) % 65;
+    int returnval = 0;
+    returnval += firstnum * 10;
+    returnval += secnum;
+    return returnval;
+  }*/
   public String toString() {
-	timer = (System.currentTimeMillis() - startTime) / 1000;
 	 String s = "Time elapsed (seconds): " + timer + "\n";
-	 s += "Number of flags left: " + board.numFlags + "\n";
 	 s += board.toString();
 	 s += "\n";
 	 s += "Previous move: " + prevMove + "\n";
@@ -69,8 +97,8 @@ public class MineSweeper{
     String directions = ""; //prints if user does something wrong
     directions += "Requirements:" + "\n";
     directions += "1. If your input length is 1, make sure it states either hard, easy or medium. (capitals don't matter).\n";
-    directions += "2. If your input length is 2, make sure it the sizes don't exceed 676 and are numbers.";
-	MineSweeper game = null;
+    directions += "2. If your input length is 2, make sure it the sizes don't exceed 27 or are letters.";
+	  MineSweeper game = null;
     try {
       if (args.length == 1){
 		      game = new MineSweeper(args[0]);
@@ -78,105 +106,26 @@ public class MineSweeper{
       else if (args.length == 2){
 		      game = new MineSweeper(args[0], args[1]);
       }
-      boolean moveVar = true; //turns false if player hits mine
-	  System.out.println(game.toString());
-	  System.out.print("Your move: ");
-	  Scanner fm = new Scanner(System.in); //makes sure that first move is always a tile with no mines around
-	  String firstmove = fm.nextLine();
-	  
-	  int firstmoverow = 0; //first move row selection
-	  firstmoverow += (firstmove.charAt(0) - 65) * 26; //first letter digit
-	  firstmoverow += firstmove.charAt(1) - 65; //second letter digit
-	  int firstmovecol = 0; //first move col selection
-	  firstmovecol += (Character.getNumericValue(firstmove.charAt(2))) * 10; //first num digit
-      firstmovecol += Character.getNumericValue(firstmove.charAt(3)); //second num digit
-	  game.board.board[firstmoverow][firstmovecol].unMine();
-	  if(firstmoverow == 0) { //unMine all tiles around first tile
-		 if(firstmovecol == 0) { //top left
-			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
-		 }
-		 if(firstmovecol == (game.board.colCount() - 1)) { //top right
-			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
-		 }
-		 else { //general top
-			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-		 }
-	  }
-	  if(firstmoverow == (game.board.rowCount() - 1)) {
-		 if(firstmovecol == 0) { //bottom left
-			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow - 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-		 }
-		 if(firstmovecol == (game.board.colCount() - 1)) { //bottom right
-			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow - 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-		 }
-		 else { //general bottom
-			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow - 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow - 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-		 }
-	  }
-	  else {
-		 if(firstmovecol == 0) {//general left
-			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow - 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-		 }
-		 if(firstmovecol == (game.board.colCount() - 1)) { //general right
-			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow - 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-		 }
-		 else { //surrounded by tiles
-			 if(game.board.board[firstmoverow - 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow - 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
-			 if(game.board.board[firstmoverow + 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
-		 } 
-	  }
-	  
-	  game.makeMove(firstmove);
-	  game.prevMove = firstmove;
-	  System.out.println(game.toString());
-	  System.out.print("Your move: ");
-      while(moveVar || (game.board.numFlags != 0 && game.board.numOpened() != (game.board.rowCount() * game.board.colCount()))) { //while the player hasn't hit a mine or hasn't opened all tiles
+      boolean moveVar = false; //turns false if player hits mine
+	    System.out.println(game.toString());
+      while(!moveVar || (game.board.numFlags != 0 && game.board.numOpened() != (game.board.rowCount() * game.board.colCount()))) { //while the player hasn't hit a mine or hasn't opened all tiles
         Scanner sc = new Scanner(System.in);
-		String nl = sc.nextLine();
+		    String nl = sc.nextLine();
         moveVar = game.makeMove(nl);
-		game.prevMove = nl;
-		System.out.println(game.toString());
-		if(moveVar) {System.out.print("Your move: ");}
+
+		    game.prevMove = nl;
+		    System.out.println(game.toString());
       }
-	  if(!moveVar) { //if game over, mine hit
+	  if(moveVar) { //if game over, mine hit
 		  System.out.println("Game over! You hit a mine!");
-	  }
+	  }/*
 	  else {
-		 System.out.println("You win! Time: " + (game.timer / 1000) + " seconds");		 
-	  }
+		 System.out.println("You win! Time: " + (game.timer / 1000) + " seconds");
+   }*/
     }
     catch (Exception e){
       System.out.println(directions);
     }
   }
+
 }

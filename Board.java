@@ -79,33 +79,43 @@ public class Board{
     }
   }
   public Board(String difficulty) { //constructor that implements presets based on difficulty
-	if(difficulty.toLowerCase().equals("easy")) {
-		hsize = 8;
-		vsize = 8;
-		board = new Tile[hsize][vsize];
-	}
-	else if(difficulty.toLowerCase().equals("medium")) {
-		hsize = 16;
-		vsize = 16;
-		board = new Tile[hsize][vsize];
-	}
-	else if(difficulty.toLowerCase().equals("hard")) {
-		hsize = 26;
-		vsize = 26;
-		board = new Tile[hsize][vsize];
-	}
-	else { //if the user types something bad
-		throw new IllegalArgumentException();
-	}
-	int ri = 0; //same as constructor above, initializes each tile
+  	if(difficulty.toLowerCase().equals("easy")) {
+  		hsize = 8;
+  		vsize = 8;
+  		board = new Tile[hsize][vsize];
+  	}
+  	else if(difficulty.toLowerCase().equals("medium")) {
+  		hsize = 16;
+  		vsize = 16;
+  		board = new Tile[hsize][vsize];
+  	}
+  	else if(difficulty.toLowerCase().equals("hard")) {
+  		hsize = 26;
+  		vsize = 26;
+  		board = new Tile[hsize][vsize];
+  	}
+  	else { //if the user types something bad
+  		throw new IllegalArgumentException();
+  	}
+    int ri = 0;
     Random rn = new Random();
     boolean mineGen = false;
     for(int q = 0; q < hsize; q++) { //loops through board[][], initializes every tile and puts down a mine per every 6.4 tiles (ideally)
         for(int w = 0; w < vsize; w++) {
-            ri = rn.nextInt() % 64;
+            ri = rn.nextInt() % 32;
             mineGen = false;
-            if(ri < 10) {mineGen = true;}
+            if(ri < -20) {
+              mineGen = true;
+            }
             board[q][w] = new Tile(mineGen, q, w);
+            if (mineGen == true){board[q][w].setTileNum(-1);}
+        }
+    }
+    for(int q = 0; q < vsize; q++) {
+        for(int w = 0; w < hsize; w++) {
+          if (board[w][q].getTileNum() != -1){
+            board[w][q].setTileNum(findTileNum(q, w));
+          }
         }
     }
   }
@@ -192,7 +202,7 @@ public class Board{
       throw new IndexOutOfBoundsException();
     }
     if (board[y][x].isOpen() == false){
-      board[y][x].setOpen();
+      board[y][x].clear();
     }
     if (board[y][x].getTileNum() > 0){
       return 0;
@@ -208,7 +218,7 @@ public class Board{
           yZero = y;
           first = false;
         }
-        board[y][x - 1].setOpen();
+        board[y][x - 1].clear();
       }
     }
     if (y != 0){
@@ -220,7 +230,7 @@ public class Board{
           yZero = y - 1;
           first = false;
         }
-        board[y - 1][x].setOpen();
+        board[y - 1][x].clear();
       }
     }
     if (x != vsize - 1){
@@ -232,7 +242,7 @@ public class Board{
           yZero = y;
           first = false;
         }
-        board[y][x + 1].setOpen();
+        board[y][x + 1].clear();
       }
     }
     if (y != hsize - 1){
@@ -244,7 +254,7 @@ public class Board{
           yZero = y;
           first = false;
         }
-        board[y + 1][x].setOpen();
+        board[y + 1][x].clear();
       }
     }
     if (x != 0 && y != 0){
@@ -256,7 +266,7 @@ public class Board{
           yZero = y - 1;
           first = false;
         }
-        board[y - 1][x - 1].setOpen();
+        board[y - 1][x - 1].clear();
       }
     }
     if (x != 0 && y != hsize - 1){
@@ -268,7 +278,7 @@ public class Board{
           yZero = y + 1;
           first = false;
         }
-        board[y + 1][x - 1].setOpen();
+        board[y + 1][x - 1].clear();
       }
     }
     if(x != vsize - 1 && y != hsize - 1){
@@ -280,7 +290,7 @@ public class Board{
           yZero = y + 1;
           first = false;
         }
-        board[y + 1][x + 1].setOpen();
+        board[y + 1][x + 1].clear();
       }
     }
     if(x != vsize - 1 && y != 0){
@@ -292,7 +302,7 @@ public class Board{
           yZero = y - 1;
           first = false;
         }
-        board[y - 1][x + 1].setOpen();
+        board[y - 1][x + 1].clear();
       }
     }
 
