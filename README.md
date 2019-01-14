@@ -87,6 +87,6 @@ Albert: Today, I made a change to the tile class, adding isOpen. Also, I finishe
 Albert: Today, I fixed some errors in the tile class, fixed the horizontal locators in the tostring in the board class, fixed tile numbers so it is displayed correctly, and the clearSpread finally works. I merged my branch into the main.
 
 # 13.01.2019
-Julian: Today, I organized the minesweeper code and started writing the code that makes the first move always result in a clear tile.
+Julian: Today, I organized the minesweeper code and started writing the code that makes the first move always result in a clear tile. I also wrote Tile method unMine() which turns a tile into a non-mine.
 
 Albert: Today, I finished Julian's code so that minesweeper runs without errors and clearSpread can run without errors. Also, I added a method which makes all tiles open after hitting a mine.
