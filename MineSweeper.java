@@ -46,6 +46,7 @@ public class MineSweeper{
     if(inp.charAt(4) == 'c') { //if user chose to clear
       if(board.board[rowSel][colSel].isFlagged()) {System.out.println("Unflag this tile to clear"); return true;} //can't clear flagged tile
       gameOver = board.board[rowSel][colSel].clear(); //if mine hit, gameOver becomes false
+	  board.clearSpread(rowSel, colSel);
 	  return gameOver;
     }
     return true;
@@ -58,6 +59,7 @@ public class MineSweeper{
   public String toString() {
 	timer = (System.currentTimeMillis() - startTime) / 1000;
 	 String s = "Time elapsed (seconds): " + timer + "\n";
+	 s += "Number of flags left: " + board.numFlags + "\n";
 	 s += board.toString();
 	 s += "\n";
 	 s += "Previous move: " + prevMove + "\n";
@@ -91,35 +93,66 @@ public class MineSweeper{
 	  game.board.board[firstmoverow][firstmovecol].unMine();
 	  if(firstmoverow == 0) { //unMine all tiles around first tile
 		 if(firstmovecol == 0) { //top left
-			 
+			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
 		 }
-		 if(firstmovecol == (game.board.vsize - 1)) { //top right
-			 
+		 if(firstmovecol == (game.board.colCount() - 1)) { //top right
+			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
 		 }
 		 else { //general top
-			 
+			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
 		 }
 	  }
-	  if(firstmoverow == (game.board.hsize - 1)) {
+	  if(firstmoverow == (game.board.rowCount() - 1)) {
 		 if(firstmovecol == 0) { //bottom left
-			 
+			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow - 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
 		 }
-		 if(firstmovecol == (game.board.vsize - 1)) { //bottom right
-			 
+		 if(firstmovecol == (game.board.colCount() - 1)) { //bottom right
+			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow - 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
 		 }
 		 else { //general bottom
-			 
+			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow - 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow - 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
 		 }
 	  }
 	  else {
 		 if(firstmovecol == 0) {//general left
-			 
+			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow - 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
 		 }
-		 if(firstmovecol == (game.board.vsize - 1)) { //general right
-			 
+		 if(firstmovecol == (game.board.colCount() - 1)) { //general right
+			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow - 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
 		 }
 		 else { //surrounded by tiles
-			 
+			 if(game.board.board[firstmoverow - 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow - 1][firstmovecol].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow - 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow][firstmovecol + 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol - 1].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol].unMine()) {game.board.numFlags--;}
+			 if(game.board.board[firstmoverow + 1][firstmovecol + 1].unMine()) {game.board.numFlags--;}
 		 } 
 	  }
 	  
