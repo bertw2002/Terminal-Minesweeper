@@ -100,7 +100,13 @@ public class MineSweeper{
   }
 
 //--------
-  // need function to display all mines after loss
+  public void gameOverClear() { //scrolls through board of tiles, clears all. run when game is over
+	 for(int q = 0; q < board.board.length; q++) {
+		for(int w = 0; w < board.board[q].length; w++) {
+			board.board[q][w].clear();
+		}
+	 }
+  }
 //--------
   public void allOpen(){
     for (int x = 0; x < board.getHsize(); x++){

@@ -78,11 +78,11 @@ public class Tile {
 	public String toString() {
 		if(!Open) {
 			if(Flagged){
-				return "🚩";
+				return ">";
 			}
 			return "_";
 		}
-		if(Mine) {return "🞜";}
+		if(Mine) {return "@";}
 		if(TileNum == 0) {return " ";}
 		return "" + TileNum;
 	}
