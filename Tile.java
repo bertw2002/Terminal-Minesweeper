@@ -58,6 +58,7 @@ public class Tile {
 		if(Mine) {return false;}
 		return true;
 	}
+	// clearspread deletes flags when flagging then unflagging and flagging but when u just do one flag it works...
 	public void flag() {
 		if (Open == false){
 			Flagged = true;

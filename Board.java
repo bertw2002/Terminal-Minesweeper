@@ -3,7 +3,7 @@ public class Board{
   public Tile[][] board; //makes the actual Board
   private int hsize; //horizontal size
   private int vsize; //vertical size
-  public int numMines; //number of mines in board
+  public int numFlags; //number of flags remaining
   public int xZero; //x coordinate of the empty tile
   public int yZero; //y coordinate of the empty tile
   //finds actual tile num, counting the number of mines around it.
@@ -65,7 +65,6 @@ public class Board{
             mineGen = false;
             if(ri < -20) {
               mineGen = true;
-			  numMines++;
             }
             board[q][w] = new Tile(mineGen, q, w);
             if (mineGen == true){board[q][w].setTileNum(-1);}
@@ -107,7 +106,6 @@ public class Board{
             mineGen = false;
             if(ri < -20) {
               mineGen = true;
-			  numMines++;
             }
             board[q][w] = new Tile(mineGen, q, w);
             if (mineGen == true){board[q][w].setTileNum(-1);}
