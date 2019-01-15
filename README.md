@@ -34,6 +34,8 @@ The columns are numbered 01, 02, 03...
 Move syntax is as follows:
 (row)(column)(action)
 
+Flags placed before the first clear move don't count.
+
 -------------
 There are three actions:
 
