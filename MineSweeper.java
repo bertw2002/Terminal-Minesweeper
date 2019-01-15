@@ -98,8 +98,6 @@ public class MineSweeper{
 	 s += "Previous move: " + prevMove + "\n";
 	 return s;
   }
-
-//--------
   public void gameOverClear() { //scrolls through board of tiles, clears all. run when game is over
 	 for(int q = 0; q < board.board.length; q++) {
 		for(int w = 0; w < board.board[q].length; w++) {
@@ -107,7 +105,6 @@ public class MineSweeper{
 		}
 	 }
   }
-//--------
   public void allOpen(){
     for (int x = 0; x < board.getHsize(); x++){
       for (int y = 0; y < board.getVsize();y++){
