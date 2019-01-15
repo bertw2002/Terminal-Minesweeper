@@ -10,6 +10,7 @@ There are two options:
 java MineSweeper (difficulty), (i.e. java MineSweeper easy) or
 java MineSweeper (row count) (column count), (i.e. java MineSweeper 40 40)
 
+-------------
 Difficulties:
 Easy: 8x8 board
 
@@ -33,6 +34,7 @@ The columns are numbered 01, 02, 03...
 Move syntax is as follows:
 (row)(column)(action)
 
+-------------
 There are three actions:
 
 Clear: clears a tile, similarly to left-clicking it. If you clear a mine tile, the game is over. (In move syntax this is 'c')
@@ -41,6 +43,7 @@ Flag: Places a flag on a tile. (In move syntax this is 'f')
 
 Unflag: Removes a flag from a tile. (In move syntax this is 'u')
 
+-------------
 Example moves:
 
 AJ14c (This means that you cleared tile in row AJ and in column 14.)
@@ -49,6 +52,20 @@ BK35f (This means that you put a flag down on tile in row BK and in column 35.)
 
 AN26u (This means that you removed a flag from tile in row AN and in column 26.)
 
+-------------
+What each tile character means on the board:
+
+(_): Unopened tile
+
+(>): Flagged tile
+
+(@): Mine (only shows up at game over)
+
+( ): Zero tile (tile with no mines around it)
+ 
+(number 1-8): Tile with (number) mines around it
+
+-------------
 That's all, enjoy!
 
 Development log
@@ -101,3 +118,6 @@ Albert: Today, I fixed some errors in the tile class, fixed the horizontal locat
 Julian: Today, I organized the minesweeper code and started writing the code that makes the first move always result in a clear tile. I also wrote Tile method unMine() which turns a tile into a non-mine.
 
 Albert: Today, I finished Julian's code so that minesweeper runs without errors and clearSpread can run without errors. Also, I added a method which makes all tiles open after hitting a mine.
+
+# 14.01.2019
+Julian: Today, I wrote the Minesweeper gameOverClear() method and changed the characters for flagged tiles and mine tiles. I also wrote some code that was later fixed by Albert that had an intended purpose of ensuring that the first selected tile would always be a clear, zero tile.
