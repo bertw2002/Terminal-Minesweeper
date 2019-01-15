@@ -60,8 +60,7 @@ public class MineSweeper{
 
       }else{
         if (board.board[colSel][rowSel].isMine()){
-
-          return true; //if mine hit, gameOver becomes false
+          return true; //if mine hit, gameOver becomes true
         }
       }
 

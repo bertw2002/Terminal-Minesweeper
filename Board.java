@@ -201,8 +201,13 @@ public class Board{
     if (x > hsize - 1 || y > vsize - 1){
       throw new IndexOutOfBoundsException();
     }
-    if (board[y][x].isOpen() == false){
-      board[y][x].clear();
+
+    if(!board[y][x].isFlagged()){
+      if (board[y][x].isOpen() == false){
+        board[y][x].clear();
+      }
+    }else{
+      return 0;
     }
     if (board[y][x].getTileNum() > 0){
       return 0;
@@ -210,7 +215,7 @@ public class Board{
     int numZeros = 0;//number of zeros surrounding tile.
     boolean first = true;
     if (x != 0){
-      if (board[y][x - 1].getTileNum() == 0  || (!board[y][x - 1].isOpen() && board[y][x - 1].getTileNum() != -1)){
+      if ((board[y][x - 1].getTileNum() == 0|| (!board[y][x - 1].isOpen() && board[y][x - 1].getTileNum() != -1)) && !board[y][x - 1].isFlagged()){
         numZeros++;
 
         if (first && (!board[y][x - 1].isOpen() && board[y][x - 1].getTileNum() == 0)){
@@ -222,7 +227,7 @@ public class Board{
       }
     }
     if (y != 0){
-      if (board[y - 1][x].getTileNum() == 0|| (!board[y - 1][x].isOpen()&& board[y - 1][x].getTileNum() != -1)){
+      if ((board[y - 1][x].getTileNum() == 0|| (!board[y - 1][x].isOpen()&& board[y - 1][x].getTileNum() != -1)) && !board[y - 1][x].isFlagged()){
         numZeros++;
 
         if (first && (!board[y - 1][x].isOpen() && board[y - 1][x].getTileNum() == 0)){
@@ -231,10 +236,11 @@ public class Board{
           first = false;
         }
         board[y - 1][x].clear();
+
       }
     }
     if (x != vsize - 1){
-      if (board[y][x + 1].getTileNum() == 0|| (!board[y][x + 1].isOpen()&& board[y][x + 1].getTileNum() != -1)){
+      if ((board[y][x + 1].getTileNum() == 0|| (!board[y][x + 1].isOpen()&& board[y][x + 1].getTileNum() != -1)) && !board[y][x + 1].isFlagged()){
         numZeros++;
 
         if (first && (!board[y][x + 1].isOpen() && board[y][x + 1].getTileNum() == 0)){
@@ -246,7 +252,7 @@ public class Board{
       }
     }
     if (y != hsize - 1){
-      if (board[y + 1][x].getTileNum() == 0 || (!board[y + 1][x].isOpen()&& board[y + 1][x].getTileNum() != -1)){
+      if ((board[y + 1][x].getTileNum() == 0|| (!board[y + 1][x].isOpen()&& board[y + 1][x].getTileNum() != -1)) && !board[y + 1][x].isFlagged()){
         numZeros++;
 
         if (first && (!board[y + 1][x].isOpen() && board[y + 1][x].getTileNum() == 0)){
@@ -258,7 +264,7 @@ public class Board{
       }
     }
     if (x != 0 && y != 0){
-      if (board[y - 1][x - 1].getTileNum() == 0|| (!board[y - 1][x - 1].isOpen()&& board[y - 1][x - 1].getTileNum() != -1)){
+      if ((board[y - 1][x - 1].getTileNum() == 0|| (!board[y - 1][x - 1].isOpen()&& board[y - 1][x - 1].getTileNum() != -1)) && !board[y - 1][x - 1].isFlagged()){
         numZeros++;
 
         if (first && (!board[y - 1][x - 1].isOpen() && board[y - 1][x - 1].getTileNum() == 0)){
@@ -270,7 +276,7 @@ public class Board{
       }
     }
     if (x != 0 && y != hsize - 1){
-      if (board[y + 1][x - 1].getTileNum() == 0 || (!board[y + 1][x - 1].isOpen()&& board[y + 1][x - 1].getTileNum() != -1)){
+      if ((board[y + 1][x - 1].getTileNum() == 0 || (!board[y + 1][x - 1].isOpen() && board[y + 1][x - 1].getTileNum() != -1)) && !board[y + 1][x - 1].isFlagged()){
         numZeros++;
 
         if (first && (!board[y + 1][x - 1].isOpen() && board[y + 1][x - 1].getTileNum() == 0)){
@@ -282,7 +288,7 @@ public class Board{
       }
     }
     if(x != vsize - 1 && y != hsize - 1){
-      if (board[y + 1][x + 1].getTileNum() == 0 || (!board[y + 1][x + 1].isOpen()&& board[y + 1][x + 1].getTileNum() != -1)){
+      if ((board[y + 1][x + 1].getTileNum() == 0 || (!board[y + 1][x + 1].isOpen()&& board[y + 1][x + 1].getTileNum() != -1)) && !board[y + 1][x + 1].isFlagged()){
         numZeros++;
 
         if (first && (!board[y + 1][x + 1].isOpen() && board[y + 1][x + 1].getTileNum() == 0)){
@@ -291,10 +297,11 @@ public class Board{
           first = false;
         }
         board[y + 1][x + 1].clear();
+
       }
     }
     if(x != vsize - 1 && y != 0){
-      if (board[y - 1][x + 1].getTileNum() == 0 || (!board[y - 1][x + 1].isOpen()&& board[y - 1][x + 1].getTileNum() != -1)){
+      if ((board[y - 1][x + 1].getTileNum() == 0 || (!board[y - 1][x + 1].isOpen()&& board[y - 1][x + 1].getTileNum() != -1)) && !board[y - 1][x + 1].isFlagged()){
         numZeros++;
 
         if (first && (!board[y - 1][x + 1].isOpen() && board[y - 1][x + 1].getTileNum() == 0)){

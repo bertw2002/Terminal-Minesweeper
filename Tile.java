@@ -1,3 +1,4 @@
+
 public class Tile {
 	private boolean Open; //Was this tile accessed?
 	private boolean Flagged; //Was this tile flagged?
@@ -60,8 +61,6 @@ public class Tile {
 	public void flag() {
 		if (Open == false){
 			Flagged = true;
-			Open = true;
-		
 		}
 	}
 	public boolean unMine() {
@@ -73,15 +72,16 @@ public class Tile {
 		return Cleared;
 	}
 	public void unflag() {
-		if (Flagged == true){
-			Open = false;
-			Flagged = false;
-		}
+		Flagged = false;
 	}
 
 	public String toString() {
-		if(!Open) {return "_";}
-		if(Flagged) {return "🚩";}
+		if(!Open) {
+			if(Flagged){
+				return "🚩";
+			}
+			return "_";
+		}
 		if(Mine) {return "🞜";}
 		if(TileNum == 0) {return " ";}
 		return "" + TileNum;
