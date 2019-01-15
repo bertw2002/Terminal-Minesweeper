@@ -41,12 +41,12 @@ public class MineSweeper{
     colSel += Character.getNumericValue(inp.charAt(3)); //second num digit
     if(inp.charAt(4) == 'f') { //if user chose to flag
       if(board.board[rowSel][colSel].isCleared()) {System.out.println("Tile already cleared"); minusmovesDone(); return false;} //can't flag cleared tile
-      board.numFlags--;
+      if (movesDone != 0){board.numFlags--;}
       board.board[rowSel][colSel].flag();
     }
     if(inp.charAt(4) == 'u') { //is user chose to unflag
       if(board.board[rowSel][colSel].isCleared()) {System.out.println("Can't unflag this tile"); minusmovesDone(); return false;} //can't unflag clear tile
-      board.numFlags++;
+      if (movesDone != 0){board.numFlags++;}
       board.board[rowSel][colSel].unflag();
     }
     if(inp.charAt(4) == 'c') { //if user chose to clear
