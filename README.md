@@ -55,10 +55,14 @@ AN26u (This means that you removed a flag from tile in row AN and in column 26.)
 -------------
 What each tile character means on the board:
 
-_: Unopened tile
->: Flagged tile
-@: Mine (only shows up at game over)
- : Zero tile (tile with no mines around it)
+(_): Unopened tile
+
+(>): Flagged tile
+
+(@): Mine (only shows up at game over)
+
+( ): Zero tile (tile with no mines around it)
+ 
 (number 1-8): Tile with (number) mines around it
 
 -------------
@@ -114,3 +118,6 @@ Albert: Today, I fixed some errors in the tile class, fixed the horizontal locat
 Julian: Today, I organized the minesweeper code and started writing the code that makes the first move always result in a clear tile. I also wrote Tile method unMine() which turns a tile into a non-mine.
 
 Albert: Today, I finished Julian's code so that minesweeper runs without errors and clearSpread can run without errors. Also, I added a method which makes all tiles open after hitting a mine.
+
+# 14.01.2019
+Julian: Today, I wrote the Minesweeper gameOverClear() method and changed the characters for flagged tiles and mine tiles. I also wrote some code that was later fixed by Albert that had an intended purpose of ensuring that the first selected tile would always be a clear, zero tile.
