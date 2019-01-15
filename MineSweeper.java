@@ -8,13 +8,15 @@ public class MineSweeper{
   private double startTime; //time started
   public String prevMove; //user's previous move
   public int movesDone; //number of moves the user made so far
+  public int numFlags;
   public MineSweeper(String diff){
     difficulty = diff;
     board = new Board(difficulty);
-	gameOver = false;
-	startTime = System.currentTimeMillis();
-	timer = System.currentTimeMillis() - startTime;
-  movesDone = 0;
+    numFlags = board.numMines;
+	  gameOver = false;
+	  startTime = System.currentTimeMillis();
+	  timer = System.currentTimeMillis() - startTime;
+    movesDone = 0;
   }
   public int getmovesDone(){
     return movesDone;
@@ -26,6 +28,7 @@ public class MineSweeper{
 	 int horiz = Integer.parseInt(hl);
 	 int vert = Integer.parseInt(vl);
 	 board = new Board(horiz, vert);
+   numFlags = board.numMines;
 	 gameOver = false;
 	 startTime = System.currentTimeMillis();
 	 timer = System.currentTimeMillis() - startTime;
@@ -41,12 +44,12 @@ public class MineSweeper{
     colSel += Character.getNumericValue(inp.charAt(3)); //second num digit
     if(inp.charAt(4) == 'f') { //if user chose to flag
       if(board.board[rowSel][colSel].isCleared()) {System.out.println("Tile already cleared"); minusmovesDone(); return false;} //can't flag cleared tile
-      if (movesDone != 0){board.numFlags--;}
+      if (movesDone != 0){numFlags--;}
       board.board[rowSel][colSel].flag();
     }
     if(inp.charAt(4) == 'u') { //is user chose to unflag
       if(board.board[rowSel][colSel].isCleared()) {System.out.println("Can't unflag this tile"); minusmovesDone(); return false;} //can't unflag clear tile
-      if (movesDone != 0){board.numFlags++;}
+      if (movesDone != 0){numFlags++;}
       board.board[rowSel][colSel].unflag();
     }
     if(inp.charAt(4) == 'c') { //if user chose to clear
@@ -57,6 +60,7 @@ public class MineSweeper{
         while (board.board[rowSel][colSel].isMine() || board.board[rowSel][colSel].getTileNum() != 0){
           board = new Board(x, y);
         }
+        numFlags = board.numMines;
 
       }else{
         if (board.board[rowSel][colSel].isMine()){
@@ -93,23 +97,19 @@ public class MineSweeper{
   }*/
   public String toString() {
    String s = "Time elapsed: " + ((System.currentTimeMillis() - startTime) / 1000) + " seconds" + "\n";
-   s += "Number of flags left: " + board.numFlags + "\n";
+   s += "Number of flags left: " + numFlags + "\n";
 	 s += board.toString();
 	 s += "\n";
 	 s += "Previous move: " + prevMove + "\n";
 	 return s;
   }
 
-//--------
-  // need function to display all mines after loss
-//--------
   public void allOpen(){
     for (int x = 0; x < board.getHsize(); x++){
       for (int y = 0; y < board.getVsize();y++){
         board.getTile(x, y).setOpen();
       }
     }
-
   }
 
   public static void main(String[] args) {
