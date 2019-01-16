@@ -11,24 +11,23 @@ public class MineSweeper{
   public MineSweeper(String diff){
     difficulty = diff;
     board = new Board(difficulty);
-<<<<<<< Updated upstream
     numFlags = board.numMines;
 	  gameOver = false;
 	  startTime = System.currentTimeMillis();
-	  timer = System.currentTimeMillis() - startTime;
     movesDone = 0;
-=======
 	numFlags = board.numMines;
 	gameOver = false;
 	startTime = System.currentTimeMillis();
-  movesDone = 0;
->>>>>>> Stashed changes
+	movesDone = 0;
   }
   public int getmovesDone(){
     return movesDone;
   }
   public void minusmovesDone(){
     movesDone--;
+  }
+  public int numFlags() {
+	return numFlags; 
   }
   public MineSweeper(String hl, String vl) {
 	 int horiz = Integer.parseInt(hl);
