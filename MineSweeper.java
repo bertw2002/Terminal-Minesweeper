@@ -144,6 +144,7 @@ public class MineSweeper{
         System.out.println("You win!");
         System.out.println("Time completed: " + ((System.currentTimeMillis() - game.startTime()) / 1000) + " seconds");
         gameWon = true;
+        break;
       }
         Scanner sc = new Scanner(System.in);
 		    String nl = sc.nextLine();
