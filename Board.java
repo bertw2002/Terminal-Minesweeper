@@ -53,10 +53,10 @@ public class Board{
     return minecounter;
   }
   public int boardNumFlags() {
-	 return numFlags; 
+	 return numFlags;
   }
   public int numMines() {
-	 return numMines; 
+	 return numMines;
   }
   public Board(int verticalsize, int horizontalsize){ //constructor for custom board specs
 	if(verticalsize < 2 || horizontalsize < 2) {throw new IllegalArgumentException();}
@@ -132,7 +132,26 @@ public class Board{
   }
   public int rowCount() {return hsize;}
   public int colCount() {return vsize;}
-
+  public boolean allFlaggedOrCleared() {
+    boolean afoc = true;
+    for(int q = 0; q < board.length; q++) {
+        for(int w = 0; w < board[q].length; w++) {
+          if(!(board[q][w].isFlagged() || board[q][w].isCleared())) {afoc = false;}
+        }
+    }
+    return afoc;
+  }
+  public boolean allMinesFlagged() {
+    boolean amf = true;
+    for(int q = 0; q < board.length; q++) {
+      for(int w = 0; w < board[q].length; w++) {
+        if(board[q][w].isMine()) {
+          if(!board[q][w].isFlagged()) {amf = false;}
+        }
+      }
+    }
+    return amf;
+  }
   public Tile getTile(int xcor, int ycor) {
     return board[xcor][ycor];
   }

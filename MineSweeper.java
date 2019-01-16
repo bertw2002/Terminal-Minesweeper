@@ -23,7 +23,10 @@ public class MineSweeper{
     movesDone--;
   }
   public int numFlags() {
-	return numFlags; 
+	return numFlags;
+  }
+  public double startTime() {
+    return startTime;
   }
   public MineSweeper(String hl, String vl) {
 	 int horiz = Integer.parseInt(hl);
@@ -112,7 +115,7 @@ public class MineSweeper{
     }
   }
   public String prevMove() {
-	 return prevMove; 
+	 return prevMove;
   }
 
   public static void main(String[] args) {
@@ -133,9 +136,15 @@ public class MineSweeper{
 		      game = new MineSweeper(args[0], args[1]);
       }
       boolean moveVar = false; //turns false if player hits mine
+      boolean gameWon = false;
 	    System.out.println(game.toString());
       while(!moveVar) { //while the player hasn't hit a mine or hasn't opened all tiles
       //^^ still have to make more restrictions. Dont forget.
+      if(game.board.allFlaggedOrCleared() && game.board.allMinesFlagged()) {
+        System.out.println("You win!");
+        System.out.println("Time completed: " + ((System.currentTimeMillis() - game.startTime()) / 1000) + " seconds");
+        gameWon = true;
+      }
         Scanner sc = new Scanner(System.in);
 		    String nl = sc.nextLine();
         moveVar = game.makeMove(nl);
@@ -144,10 +153,11 @@ public class MineSweeper{
 		    System.out.println(game.toString());
         //still have to implement a congrats if they win.
       }
+      if(!gameWon) {
       game.allOpen();
       System.out.println(game.toString());
 		  System.out.println("Game over! You hit a mine!");
-
+      }
     }
     catch (Exception e){
       System.out.println(directions);
