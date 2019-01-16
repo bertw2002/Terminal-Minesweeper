@@ -3,10 +3,10 @@ public class Board{
   public Tile[][] board; //makes the actual Board
   private int hsize; //horizontal size
   private int vsize; //vertical size
-  public int numFlags; //number of flags remaining
-  public int numMines; //number of mines in board
-  public int xZero; //x coordinate of the empty tile
-  public int yZero; //y coordinate of the empty tile
+  private int numFlags; //number of flags remaining
+  private int numMines; //number of mines in board
+  private int xZero; //x coordinate of the empty tile
+  private int yZero; //y coordinate of the empty tile
   //finds actual tile num, counting the number of mines around it.
   public int findTileNum(int x, int y){
     int minecounter = 0;
@@ -51,6 +51,12 @@ public class Board{
       }
     }
     return minecounter;
+  }
+  public int boardNumFlags() {
+	 return numFlags; 
+  }
+  public int numMines() {
+	 return numMines; 
   }
   public Board(int verticalsize, int horizontalsize){ //constructor for custom board specs
 	if(verticalsize < 2 || horizontalsize < 2) {throw new IllegalArgumentException();}

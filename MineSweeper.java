@@ -11,7 +11,7 @@ public class MineSweeper{
   public MineSweeper(String diff){
     difficulty = diff;
     board = new Board(difficulty);
-    numFlags = board.numMines;
+    numFlags = board.numMines();
 	  gameOver = false;
 	  startTime = System.currentTimeMillis();
     movesDone = 0;
@@ -29,7 +29,7 @@ public class MineSweeper{
 	 int horiz = Integer.parseInt(hl);
 	 int vert = Integer.parseInt(vl);
 	 board = new Board(horiz, vert);
-   numFlags = board.numMines;
+   numFlags = board.numMines();
 	 gameOver = false;
 	 startTime = System.currentTimeMillis();
    movesDone = 0;
@@ -60,7 +60,7 @@ public class MineSweeper{
         while (board.board[rowSel][colSel].isMine() || board.board[rowSel][colSel].getTileNum() != 0){
           board = new Board(x, y);
         }
-        numFlags = board.numMines;
+        numFlags = board.numMines();
 
       }else{
         if (board.board[rowSel][colSel].isMine()){
