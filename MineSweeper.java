@@ -5,9 +5,9 @@ public class MineSweeper{
   private String difficulty; //difficulty level if applicable
   private boolean gameOver; //is the game over?
   private double startTime; //time started
-  public String prevMove; //user's previous move
-  public int movesDone; //number of moves the user made so far
-  public int numFlags;
+  private String prevMove; //user's previous move
+  private int movesDone; //number of moves the user made so far
+  private int numFlags;
   public MineSweeper(String diff){
     difficulty = diff;
     board = new Board(difficulty);
@@ -15,10 +15,6 @@ public class MineSweeper{
 	  gameOver = false;
 	  startTime = System.currentTimeMillis();
     movesDone = 0;
-	numFlags = board.numMines;
-	gameOver = false;
-	startTime = System.currentTimeMillis();
-	movesDone = 0;
   }
   public int getmovesDone(){
     return movesDone;
@@ -114,6 +110,9 @@ public class MineSweeper{
         board.getTile(x, y).setOpen();
       }
     }
+  }
+  public String prevMove() {
+	 return prevMove; 
   }
 
   public static void main(String[] args) {
