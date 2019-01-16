@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.lang.*;
 public class MineSweeper{
   private Board board; //the board (this is not a direct reference to the Tile[][] array)
-  public double timer; //timer
   private String difficulty; //difficulty level if applicable
   private boolean gameOver; //is the game over?
   private double startTime; //time started
@@ -12,11 +11,18 @@ public class MineSweeper{
   public MineSweeper(String diff){
     difficulty = diff;
     board = new Board(difficulty);
+<<<<<<< Updated upstream
     numFlags = board.numMines;
 	  gameOver = false;
 	  startTime = System.currentTimeMillis();
 	  timer = System.currentTimeMillis() - startTime;
     movesDone = 0;
+=======
+	numFlags = board.numMines;
+	gameOver = false;
+	startTime = System.currentTimeMillis();
+  movesDone = 0;
+>>>>>>> Stashed changes
   }
   public int getmovesDone(){
     return movesDone;
@@ -31,7 +37,6 @@ public class MineSweeper{
    numFlags = board.numMines;
 	 gameOver = false;
 	 startTime = System.currentTimeMillis();
-	 timer = System.currentTimeMillis() - startTime;
    movesDone = 0;
   } //MAKE SURE TO ADD CONSTRUCTOR LETTING PLAYER CUSTOMIZE NUM OF MINES LATER!!!!!
   public boolean makeMove(String inp) {
