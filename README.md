@@ -125,3 +125,8 @@ Albert: Today, I finished Julian's code so that minesweeper runs without errors 
 Julian: Today, I wrote the Minesweeper gameOverClear() method and changed the characters for flagged tiles and mine tiles. I also wrote some code that was later fixed by Albert that had an intended purpose of ensuring that the first selected tile would always be a clear, zero tile.
 
 Albert: Today, I fixed the error that made the program stop after a bad input and made the program delete all the flags that are placed before the first move. Also, I fixed the error that the board didn't open all tiles after losing.
+
+# 15.09.2019
+Julian: Today, I fixed the Number of Flags printing in MineSweeper and privatized all class variables in MineSweeper and Board, replacing them with accessor methods.
+
+Albert: Today, I fixed the numFlags functionality.
