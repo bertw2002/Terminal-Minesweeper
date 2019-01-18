@@ -8,6 +8,7 @@ public class MineSweeper{
   private String prevMove; //user's previous move
   private int movesDone; //number of moves the user made so far
   private int numFlags;
+  // constructor for string difficulty parameter.
   public MineSweeper(String diff){
     difficulty = diff;
     board = new Board(difficulty);
@@ -19,15 +20,14 @@ public class MineSweeper{
   public int getmovesDone(){
     return movesDone;
   }
-  public void minusmovesDone(){
-    movesDone--;
-  }
+
   public int numFlags() {
 	return numFlags;
   }
   public double startTime() {
     return startTime;
   }
+  //constructor for actual lengths
   public MineSweeper(String hl, String vl) {
 	 int horiz = Integer.parseInt(hl);
 	 int vert = Integer.parseInt(vl);
@@ -36,9 +36,9 @@ public class MineSweeper{
 	 gameOver = false;
 	 startTime = System.currentTimeMillis();
    movesDone = 0;
-  } //MAKE SURE TO ADD CONSTRUCTOR LETTING PLAYER CUSTOMIZE NUM OF MINES LATER!!!!!
+  }
   public boolean makeMove(String inp) {
-	  if(inp.length() != 5) {System.out.println("Follow the correct move format! It's on the README"); minusmovesDone();return false;} //length of input correct?
+	  if(inp.length() != 5) {System.out.println("Follow the correct move format! It's on the README"); return false;} //length of input correct?
     int rowSel = 0; //row selected
     rowSel += (inp.charAt(0) - 65) * 26; //first letter digit
     rowSel += inp.charAt(1) - 65; //second letter digit
@@ -46,17 +46,17 @@ public class MineSweeper{
     colSel += (Character.getNumericValue(inp.charAt(2))) * 10; //first num digit
     colSel += Character.getNumericValue(inp.charAt(3)); //second num digit
     if(inp.charAt(4) == 'f') { //if user chose to flag
-      if(board.board[rowSel][colSel].isCleared()) {System.out.println("Tile already cleared"); minusmovesDone(); return false;} //can't flag cleared tile
+      if(board.board[rowSel][colSel].isCleared()) {System.out.println("Tile already cleared"); return false;} //can't flag cleared tile
       if (movesDone != 0){numFlags--;}
       board.board[rowSel][colSel].flag();
     }
-    if(inp.charAt(4) == 'u') { //is user chose to unflag
-      if(board.board[rowSel][colSel].isCleared()) {System.out.println("Can't unflag this tile"); minusmovesDone(); return false;} //can't unflag clear tile
+    if(inp.charAt(4) == 'u') { //if user chose to unflag
+      if(board.board[rowSel][colSel].isCleared()) {System.out.println("Can't unflag this tile"); return false;} //can't unflag clear tile
       if (movesDone != 0){numFlags++;}
       board.board[rowSel][colSel].unflag();
     }
     if(inp.charAt(4) == 'c') { //if user chose to clear
-      if (board.board[rowSel][colSel].isFlagged()) {System.out.println("Unflag this tile to clear"); minusmovesDone(); return false;} //can't clear flagged tile
+      if (board.board[rowSel][colSel].isFlagged()) {System.out.println("Unflag this tile to clear"); return false;} //can't clear flagged tile
       if (movesDone == 0){
         int x = board.getHsize();
         int y = board.getVsize();
@@ -79,25 +79,7 @@ public class MineSweeper{
 
     return false;
   }
-/*
-  public int turnindex(String twonumber){ //turns the input value into a readable index. Number version.
-    int firstnum = Integer.parseInt(twonumber.substring(0, 1));
-    int secnum = Integer.parseInt(twonumber.substring(1, 2));
-    int returnval = 0;
-    returnval += firstnum * 10;
-    returnval += secnum;
-    return returnval;
-  }
-  public int turnindexalph(String twoalph){//turns the input value into a readable index. alphabet version.
-    char firstc = twoalph.charAt(0);
-    char sec = twoalph.charAt(1);
-    int firstnum = Character.getNumericValue(firstc) % 65;
-    int secnum = Character.getNumericValue(sec) % 65;
-    int returnval = 0;
-    returnval += firstnum * 10;
-    returnval += secnum;
-    return returnval;
-  }*/
+
   public String toString() {
    String s = "Time elapsed: " + ((System.currentTimeMillis() - startTime) / 1000) + " seconds" + "\n";
    s += "Number of flags left: " + numFlags + "\n";
@@ -106,7 +88,7 @@ public class MineSweeper{
 	 s += "Previous move: " + prevMove + "\n";
 	 return s;
   }
-
+//makes all mines open when they lose.
   public void allOpen(){
     for (int x = 0; x < board.getHsize(); x++){
       for (int y = 0; y < board.getVsize();y++){
@@ -152,7 +134,6 @@ public class MineSweeper{
 
 		    game.prevMove = nl;
 		    System.out.println(game.toString());
-        //still have to implement a congrats if they win.
       }
       if(!gameWon) {
       game.allOpen();
