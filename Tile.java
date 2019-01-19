@@ -79,7 +79,7 @@ public class Tile {
 	public String toString() {
 		if(!Open) {
 			if(Flagged){
-				return ">"; // > = flag
+				return ">"; //> = flag
 			}
 			return "_";
 		}

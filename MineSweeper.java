@@ -121,13 +121,13 @@ public class MineSweeper{
       boolean gameWon = false;
 	    System.out.println(game.toString());
       while(!moveVar) { //while the player hasn't hit a mine or hasn't opened all tiles
-      //^^ still have to make more restrictions. Dont forget.
       if(game.board.allFlaggedOrCleared() && game.board.allMinesFlagged()) {
         System.out.println("You win!");
         System.out.println("Time completed: " + ((System.currentTimeMillis() - game.startTime()) / 1000) + " seconds");
         gameWon = true;
         break;
       }
+      //allows players to make moves.
         Scanner sc = new Scanner(System.in);
 		    String nl = sc.nextLine();
         moveVar = game.makeMove(nl);
