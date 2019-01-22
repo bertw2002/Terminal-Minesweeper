@@ -126,7 +126,13 @@ Julian: Today, I wrote the Minesweeper gameOverClear() method and changed the ch
 
 Albert: Today, I fixed the error that made the program stop after a bad input and made the program delete all the flags that are placed before the first move. Also, I fixed the error that the board didn't open all tiles after losing.
 
-# 15.09.2019
+# 15.01.2019
 Julian: Today, I fixed the Number of Flags printing in MineSweeper and privatized all class variables in MineSweeper and Board, replacing them with accessor methods.
 
 Albert: Today, I fixed the numFlags functionality.
+
+# 16.01.2019
+Julian: Today, I made the program end after a win.
+
+# 18.01.2019
+Albert: Today, I added comments, and fixed an error that added unnecesary make moves. The project should be fully finished. 
