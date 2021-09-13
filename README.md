@@ -1,5 +1,5 @@
 # TerminalMinesweeper
-Julian Wong &amp; Albert Wan (APCS final project)
+Julian Wong &amp; Albert Wan 
 
 # Directions
 
